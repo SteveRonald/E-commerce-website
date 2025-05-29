@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoNest | Eco-Friendly Home Store</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background: #f4f4f4; margin: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        header {
+            background: #2f6b29;
+            color: #fff;
+            padding: 24px 0 12px 0;
+            text-align: center;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 18px;
+            font-size: 1.08em;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: #FFD700; }
+        .search-bar {
+            margin: 18px auto 0 auto;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 2px 8px rgba(47,107,41,0.07);
+            padding: 4px 12px;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 10px 8px;
+            border-radius: 24px;
+            font-size: 1em;
+            background: transparent;
+        }
+        .search-bar button {
+            background: #2f6b29;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 6px;
+        }
+        #hero {
+            background: linear-gradient(90deg, #e8f5e9 60%, #fff 100%);
+            text-align: center;
+            padding: 60px 20px 50px 20px;
+            margin-bottom: 0;
+        }
+        #hero h2 {
+            font-size: 2.7rem;
+            margin-bottom: 16px;
+            color: #2f6b29;
+        }
+        #hero p {
+            font-size: 1.25rem;
+            color: #256021;
+            margin-bottom: 24px;
+        }
+        #hero .btn {
+            background: #2f6b29;
+            color: #fff;
+            border: none;
+            padding: 14px 38px;
+            border-radius: 28px;
+            font-size: 1.15em;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        #hero .btn:hover { background: #FFD700; }
+        .categories {
+            background: #fff;
+            padding: 32px 0 18px 0;
+            text-align: center;
+        }
+        .categories h3 { color: #2f6b29; margin-bottom: 18px; }
+        .category-list {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .category-item {
+            background: #e8f5e9;
+            color: #2f6b29;
+            padding: 8px 12px;
+            border-radius: 18px;
+            font-size: 1.1em;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(47,107,41,0.07);
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .category-item:hover { background: #2f6b29; color: #fff; }
+        .featured {
+            text-align: center;
+            padding: 50px 20px 30px 20px;
+            background-color: #fff;
+        }
+        .featured h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #2f6b29;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            margin-left: 1%;
+        }
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(47,107,41,0.07);
+            height: 100%;
+            min-height: 400px;/* Ensures all cards are the same height */
+        }
+        .product-card img {
+            width: 80%;
+            max-width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .product-card h3 {
+            font-size: 1.25rem;
+            margin: 10px 0 6px 0;
+            color: #256021;
+        }
+        .product-card .star-rating {
+            margin: 0 0 6px 0;
+            font-size: 1.1em;
+        }
+        .star-rating .star {
+            color: #ccc;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star-rating .star.selected { color: #FFD700; }
+        .love-btn {
+            color: #bbb;
+            font-size: 1.3em;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: color 0.2s;
+        }
+        .love-btn.loved, .love-btn:hover { color: #e74c3c !important; }
+        .product-card p {
+            font-size: 1.08rem;
+            color: #0f130f;
+            margin: 10px 0;
+        }
+        .product-card .btn {
+            background: #2f6b29;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 22px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .product-card .btn:hover { background: #256021; }
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin: 38px 0 0 0;
+            flex-wrap: wrap;
+        }
+        .trust-badge {
+            background: #e8f5e9;
+            color: #2f6b29;
+            padding: 16px 28px;
+            border-radius: 14px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(47,107,41,0.07);
+        }
+        .testimonials {
+            background: #f4f4f4;
+            padding: 40px 0 30px 0;
+            text-align: center;
+        }
+        .testimonials h3 { color: #2f6b29; margin-bottom: 18px; }
+        .testimonial-list {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .testimonial {
+            background: #fff;
+            border-radius: 14px;
+            padding: 22px 28px;
+            box-shadow: 0 2px 8px rgba(47,107,41,0.07);
+            max-width: 340px;
+            font-size: 1.08em;
+            color: #256021;
+        }
+        .testimonial .author {
+            margin-top: 12px;
+            font-weight: bold;
+            color: #2f6b29;
+        }
+        .newsletter {
+            background: #fff;
+            padding: 38px 0 30px 0;
+            text-align: center;
+        }
+        .newsletter h3 { color: #2f6b29; margin-bottom: 12px; }
+        .newsletter input[type="email"] {
+            padding: 10px 16px;
+            border-radius: 22px;
+            border: 1px solid #c8e6c9;
+            font-size: 1em;
+            margin-right: 8px;
+            width: 220px;
+            max-width: 80vw;
+        }
+        .newsletter button {
+            background: #2f6b29;
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 22px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .newsletter button:hover { background: #256021; }
+        footer {
+            background-color: #2f6b29;
+            color: white;
+            text-align: center;
+            padding: 30px 10px 18px 10px;
+            font-size: 1rem;
+        }
+        .footer-links, .footer-social {
+            margin: 12px 0;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .footer-links a, .footer-social a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.08em;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover, .footer-social a:hover { color: #FFD700; }
+        .footer-social a { font-size: 1.3em; }
+        .fa-star { color: #FFD700; }
+        .fa-heart { color: #bbb; transition: color 0.2s; }
+        .fa-heart.loved, .fa-heart:hover { color: #e74c3c !important; }
+        .category-item { cursor:pointer; }
+        .product-card .btn[disabled] {
+            background: #ccc !important;
+            color: #fff !important;
+            cursor: not-allowed;
+        }
+        @media (max-width: 700px) {
+            .product-grid { grid-template-columns: 1fr; }
+            .category-list, .testimonial-list, .trust-badges { flex-direction: column; gap: 18px; }
+        }
+
+        #whatsapp-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2em;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    z-index: 9999;
+    transition: background 0.2s;
+    text-decoration: none;
+}
+#whatsapp-float:hover {
+    background: #128c7e;
+    color: #fff;
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>EcoNest</h1>
+    <nav>
+        <a href="../pages/index.html">Home</a>
+        <a href="../modules/shop_main.php">Shop</a>
+        <a href="../pages/about.html">About</a>
+        <a href="../pages/contact.html">Contact</a>
+        <a href="../modules/login.php">Login</a>
+        <a href="../modules/register.php">Register</a>
+    </nav>
+    <form class="search-bar" action="../modules/shop_main.php" method="get">
+        <input type="text" name="search" placeholder="Search for products..." />
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</header>
+
+<section id="hero">
+    <h2>Eco-Friendly Living Starts Here 🌿</h2>
+    <p>Shop sustainable products and support a cleaner planet.</p>
+    <a href="../modules/shop_main.php" class="btn">Shop Now</a>
+</section>
+
+<section class="categories">
+    <h3>Shop by Category</h3>
+    <div class="category-list">
+        <div  class="category-item" data-category="bamboo">Bamboo Products</div>
+        <div class="category-item" data-category="beeswax">Beeswax Products</div>
+        <div class="category-item" data-category="Reusable Products">Reusable Products</div>
+        <div class="category-item" data-category="Compostable Products">Compostable Products</div>
+        <div class="category-item" data-category="Upcycled Products">Upcycled Products</div>
+        <div class="category-item" data-category="Natural Skincare">Natural Skincare</div>
+    </div>
+</section>
+
+<section class="featured">
+    <h2>Featured Products</h2>
+    <div id="featured-products" class="product-grid">
+        <div class="product-card">
+            <img src="../images/bamboo-toothbrush.jpg" alt="Bamboo Toothbrush">
+            <h3>Bamboo Toothbrush</h3>
+            <div class="star-rating">
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <span style="font-size:0.95em;color:#888;">(4.0/5)</span>
+            </div>
+            <span><i class="fa fa-heart"></i> 12</span>
+            <p>
+                <span style="color:#888;text-decoration:line-through;margin-right:8px;">KSh 350</span>
+                <span style="color: #2f6b29; font-weight:bold;">KSh 250</span>
+            </p>
+            <p>Eco-friendly and biodegradable toothbrush made from sustainable bamboo. Perfect for reducing plastic waste.</p>
+            <button class="btn add-to-cart-btn" title="Login to add to cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="../images/beeswax-wrap.jpg" alt="Beeswax Wrap">
+            <h3>Beeswax Wrap</h3>
+            <div class="star-rating">
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star"></i>
+                <span style="font-size:0.95em;color:#888;">(4.5/5)</span>
+            </div>
+            <span><i class="fa fa-heart"></i> 20</span>
+            <p>
+                <span style="color:#888;text-decoration:line-through;margin-right:8px;">KSh 700</span>
+                <span style="color: #2f6b29; font-weight:bold;">KSh 500</span>
+            </p>
+            <p>A natural and reusable alternative to plastic wrap. Perfect for keeping your food fresh and waste-free.</p>
+            <button class="btn add-to-cart-btn" title="Login to add to cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="../images/reusable-bag.jpg" alt="Reusable Bag">
+            <h3>Reusable Bag</h3>
+            <div class="star-rating">
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <span style="font-size:0.95em;color:#888;">(3.0/5)</span>
+            </div>
+            <span><i class="fa fa-heart"></i> 8</span>
+            <p>
+                <span style="color:#888;text-decoration:line-through;margin-right:8px;">KSh 500</span>
+                <span style="color: #2f6b29; font-weight:bold;">KSh 350</span>
+            </p>
+            <p>Say no to plastic bags! Our reusable bags are strong, durable, and great for shopping or carrying daily essentials.</p>
+            <button class="btn add-to-cart-btn" title="Login to add to cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="../images/compost.jpg" alt="Compost Bag">
+            <h3>Compost Bag</h3>
+            <div class="star-rating">
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star selected"></i>
+                <i class="fa fa-star"></i>
+                <span style="font-size:0.95em;color:#888;">(4.5/5)</span>
+            </div>
+            <span><i class="fa fa-heart"></i> 15</span>
+            <p>
+                <span style="color:#888;text-decoration:line-through;margin-right:8px;">KSh 500</span>
+                <span style="color: #2f6b29; font-weight:bold;">KSh 350</span>
+            </p>
+            <p>Compostable bags for your kitchen and garden waste. 100% biodegradable and planet-friendly.</p>
+            <button class="btn add-to-cart-btn" title="Login to add to cart">Add to Cart</button>
+        </div>
+    </div>
+    <div class="trust-badges">
+        <div class="trust-badge">&#128274; Secure Payments</div>
+        <div class="trust-badge">&#127793; Eco-Friendly</div>
+        <div class="trust-badge">&#128230; Fast Delivery</div>
+        <div class="trust-badge">&#128176; Money-back Guarantee</div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <h3>What Our Customers Say</h3>
+    <div class="testimonial-list">
+        <div class="testimonial">
+            "EcoNest has changed the way I shop for my family. The products are top quality and truly eco-friendly!"
+            <div class="author">— Jane M.</div>
+        </div>
+        <div class="testimonial">
+            "Fast delivery and great customer service. I love the beeswax wraps and reusable bags!"
+            <div class="author">— Brian O.</div>
+        </div>
+        <div class="testimonial">
+            "I recommend EcoNest to anyone who wants to make a positive impact on the environment."
+            <div class="author">— Mercy K.</div>
+        </div>
+    </div>
+</section>
+
+<section class="newsletter">
+    <h3>Subscribe to Our Newsletter</h3>
+    <form id="newsletterForm" onsubmit="event.preventDefault(); showNewsletterMsg();">
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <div id="newsletterMsg" style="display:none;color:#256021;margin-top:10px;font-weight:500;">Thank you for subscribing!</div>
+</section>
+
+<footer>
+    <div class="footer-links">
+        <a href="../pages/about.html">About</a>
+        <a href="../pages/contact.html">Contact</a>
+        <a href="../modules/register.php">Register</a>
+        <a href="../pages/faq.html">FAQ</a>
+        <a href="../modules/shop_main.php">Shop</a>
+    </div>
+   <div class="footer-social">
+    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+</div>
+    <p>&copy; 2025 EcoNest. All rights reserved.</p>
+</footer>
+
+<a href="https://wa.me/254799422635?text=Hello%20EcoNest%20  " target="_blank" id="whatsapp-float" title="Chat with us on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+function showNewsletterMsg() {
+    document.getElementById('newsletterMsg').style.display = 'block';
+    setTimeout(() => {
+        document.getElementById('newsletterMsg').style.display = 'none';
+        document.getElementById('newsletterForm').reset();
+    }, 3500);
+}
+
+// Category click: redirect to shop_main.php with category filter
+document.querySelectorAll('.category-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+        const cat = encodeURIComponent(this.getAttribute('data-category'));
+        window.location.href = '../modules/shop_main.php?category=' + cat;
+    });
+});
+
+// Add to Cart: show login prompt
+document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Please login or create an account to add products to your cart.');
+        window.location.href = '../modules/login.php';
+    });
+});
+</script>
+</body>
+</html>

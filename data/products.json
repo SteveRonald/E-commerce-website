@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Bamboo Toothbrush",
+    "price": 250,
+    "image": "images/toothbrush.jpg",
+    "description": "Eco-friendly bamboo toothbrush."
+  },
+  {
+    "id": 2,
+    "name": "Beeswax Wrap",
+    "price": 500,
+    "image": "images/beeswax-wrap.jpg",
+    "description": "Reusable food wrap made from beeswax."
+  },
+  {
+    "id": 3,
+    "name": "Compost Bin",
+    "price": 1200,
+    "image": "images/compost-bin.jpg",
+    "description": "Kitchen compost bin to reduce waste."
+  }
+]
