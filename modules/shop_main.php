@@ -226,6 +226,8 @@ if (count($productIds)) {
             display: flex;
             flex-direction: column;
         }
+        
+         nav a:hover { color: #FFD700; }
 
         .modal-body {
             display: flex;
@@ -387,8 +389,6 @@ if (count($productIds)) {
     <h1>EcoNest</h1>
     <nav>
         <a href="../pages/index.html">Home</a>
-        <a href="../modules/shop_main.php">Shop</a>
-        <a href="../pages/about.html">About</a>
         <a href="../pages/contact.html">Contact</a>
          <a href="cart.php" id="cartLink">Cart <span id="cartCount" style="background:#e74c3c;color:#fff;padding:2px 8px;border-radius:50%;font-size:0.9em;position:relative;top:-4px;left:-2px;">0</span></a>
          <a href="../modules/account.php">My Account</a>
