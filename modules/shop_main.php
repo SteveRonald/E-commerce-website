@@ -28,6 +28,7 @@ if (count($productIds)) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Shop | EcoNest</title>
     <style>
         /* Global styles */
@@ -52,6 +53,8 @@ if (count($productIds)) {
             color: white;
             margin: 0 15px;
             text-decoration: none;
+            font-size: 0.6em; /* Match index.html font size */
+            transition: color 0.2s;
         }
 
         .shop-container {
@@ -385,14 +388,19 @@ if (count($productIds)) {
 </head>
 <body>
 
+
 <header>
-    <h1>EcoNest</h1>
-    <nav>
-        <a href="../pages/index.html">Home</a>
-        <a href="../pages/contact.html">Contact</a>
-         <a href="cart.php" id="cartLink">Cart <span id="cartCount" style="background:#e74c3c;color:#fff;padding:2px 8px;border-radius:50%;font-size:0.9em;position:relative;top:-4px;left:-2px;">0</span></a>
-         <a href="../modules/account.php">My Account</a>
-    </nav>
+    <h1 style="margin:0;display:flex;align-items:center;justify-content:center;gap:8px;">
+        EcoNest
+        <nav style="flex:1;display:flex;justify-content:center;gap:3px;align-items:center;">
+            <a href="../pages/index.html">Home</a>
+            <a href="../modules/account.php">My Account</a>
+            <a href="cart.php" id="cartLink" style="position:relative;display:flex;align-items:center;gap:6px;">
+                <i class="fa fa-shopping-cart" style="font-size:1em;"></i>
+                <span id="cartCount" style="background:#e74c3c;color:#fff;padding:2px 8px;border-radius:50%;font-size:0.9em;position:absolute;top:-10px;right:-14px;">0</span>
+            </a>
+        </nav>
+    </h1>
 </header>
 
 <section class="shop-container">

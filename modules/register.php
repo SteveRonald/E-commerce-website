@@ -204,6 +204,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit">Register</button>
         </form>
+        <!-- Google Sign-In Section -->
+<div style="text-align:center;margin:32px 0 24px 0;">
+    <div style="font-size:1.1em;color:#2f6b29;font-weight:600;margin-bottom:10px;letter-spacing:0.5px;">
+      Or
+    </div>
+    <div id="gSignInWrapper">
+        <div id="g_id_onload"
+            data-client_id="633377089412-nq4smjp6ugsb5qvi7orvv7kr1epb9hg1.apps.googleusercontent.com"
+            data-context="signup"
+            data-ux_mode="redirect"
+            data-login_uri="http://localhost/e-commerce/EcoNest/modules/google_callback.php"
+            data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="signup_with"
+            data-size="large">
+        </div>
+    </div>
+</div>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
         <p>Already have an account? <a href="../modules/login.php">Login</a></p>
     </div>
     <script>

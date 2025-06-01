@@ -406,7 +406,7 @@ $status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : null;
         <p class="payment-title">Select Payment Method</p>
         <div class="methods">
             <label class="method">
-                <input type="radio" name="payment_method" value="MPESA" checked onclick="showPaymentMethod('mpesa')">
+                <input type="radio" name="payment_method" value="MPESA" onclick="showPaymentMethod('mpesa')">
                 <img src="../images/M-PESA-logo-2.png" alt="MPESA" title="MPESA">
                 <span>MPESA</span>
             </label>
@@ -428,7 +428,7 @@ $status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : null;
         <input type="hidden" name="product_quantity" value="<?php echo $productQuantity; ?>">
 
         <!-- MPESA Payment Inputs -->
-        <div id="mpesaInputs">
+        <div id="mpesaInputs" style="display: none;">
             <label for="full_name">Full Name (as it appears on MPESA):</label>
             <input type="text" id="full_name" name="full_name" required minlength="3">
             <div id="fullNameError" class="error-message" style="display:none;">Please enter your full name (at least 3 characters).</div>
@@ -443,7 +443,7 @@ $status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : null;
             <p style="text-align: center; color: #888;">Credit Card payment is coming soon!</p>
         </div>
 
-        <button  type="submit">Pay KSh <?php echo number_format($totalPrice, 2); ?> Now</button>
+        <button type="submit" style="display:none;" id="payBtn">Pay KSh <?php echo number_format($totalPrice, 2); ?> Now</button>
     </form>
 </div>
 
@@ -612,6 +612,18 @@ $status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : null;
             mpesaInputs.style.display = 'none';
             creditCardInputs.style.display = 'block';
         }
+    }
+
+    // Hide payment fields and button by default
+    document.getElementById('mpesaInputs').style.display = 'none';
+    document.getElementById('creditCardInputs').style.display = 'none';
+    document.getElementById('payBtn').style.display = 'none';
+
+    // Show relevant payment fields when method is selected
+    function showPaymentMethod(method) {
+        document.getElementById('mpesaInputs').style.display = (method === 'mpesa') ? 'block' : 'none';
+        document.getElementById('creditCardInputs').style.display = (method === 'credit_card') ? 'block' : 'none';
+        document.getElementById('payBtn').style.display = 'block';
     }
 </script>
 

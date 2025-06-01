@@ -1,4 +1,12 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../phpmailer-master/src/PHPMailer.php';
+require '../phpmailer-master/src/SMTP.php';
+require '../phpmailer-master/src/Exception.php';
+
+// Adjust path if needed
 session_start();
 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
@@ -84,7 +92,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sdsidssssss", $productName, $productPrice, $productColor, $productQuantity, $totalPrice, $fullName, $mpesaNumber, $response, $user_id, $delivery_address, $order_status);
 
     if ($stmt->execute()) {
-        header("Location: ../modules/success.php?status=success&message=Transaction successful, and order sent");
+        // Get user email (fetch from DB)
+        $userEmail = '';
+        if ($user_id) {
+            $stmt2 = $conn->prepare("SELECT email FROM users WHERE id=?");
+            $stmt2->bind_param("i", $user_id);
+            $stmt2->execute();
+            $stmt2->bind_result($userEmail);
+            $stmt2->fetch();
+            $stmt2->close();
+        } else {
+            // If guest checkout, get from form if available
+            $userEmail = isset($_POST['email']) ? $_POST['email'] : '';
+        }
+
+        if ($userEmail) {
+            $mail = new PHPMailer(true);
+            try {
+                //Server settings
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'okothroni863@gmail.com'; // Your Gmail address
+                $mail->Password   = 'lmag tcnr iyki avzx';    // Gmail App Password (not your Gmail password)
+                $mail->SMTPSecure = 'tls';
+                $mail->Port       = 587;
+
+                //Recipients
+                $mail->setFrom('okothroni863@gmail.com', 'EcoNest');
+                $mail->addAddress($userEmail, $fullName);
+
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Your EcoNest Order Confirmation';
+                $mail->Body    = "
+                    <h2>Thank you for your order, {$fullName}!</h2>
+                    <p>Order Details:</p>
+                    <ul>
+                        <li>Product: {$productName}</li>
+                        <li>Color: {$productColor}</li>
+                        <li>Quantity: {$productQuantity}</li>
+                        <li>Total: KSh {$totalPrice}</li>
+                        <li>Delivery Address: {$delivery_address}</li>
+                    </ul>
+                    <p>We will contact you soon.</p>
+                ";
+                $mail->AltBody = "Thank you for your order, {$fullName}!\nProduct: {$productName}\nColor: {$productColor}\nQuantity: {$productQuantity}\nTotal: KSh {$totalPrice}\nDelivery Address: {$delivery_address}";
+
+                $mail->send();
+                // Optionally log success
+            } catch (Exception $e) {
+                // Optionally log error: $mail->ErrorInfo
+            }
+        }
+
+
+        header("Location: success.php?status=success&message=Your order has been placed successfully.&emailmsg=Order confirmation email sent! Check your inbox.");
         exit();
     } else {
         header("Location: ../modules/shop.php?status=error&message=Failed to save transaction.");

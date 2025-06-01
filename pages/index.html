@@ -11,20 +11,53 @@
         header {
             background: #2f6b29;
             color: #fff;
-            padding: 24px 0 12px 0;
-            text-align: center;
+            padding: 0;
         }
-        nav {
-            margin-top: 10px;
+        .header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 80px;
+            padding: 0 32px;
         }
-        nav a {
+        .logo {
+            font-weight: bold;
+            font-size: 2.1em;
+            letter-spacing: 2px;
             color: #fff;
             text-decoration: none;
-            margin: 0 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-main {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .nav-main a {
+            color: #fff;
+            text-decoration: none;
             font-size: 1.08em;
             transition: color 0.2s;
+            padding: 6px 10px;
         }
-        nav a:hover { color: #FFD700; }
+        .nav-main a:hover { color: #FFD700; }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        .nav-right a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.08em;
+            transition: color 0.2s;
+            padding: 6px 10px;
+        }
+        .nav-right a:hover { color: #FFD700; }
         .search-bar {
             margin: 18px auto 0 auto;
             max-width: 400px;
@@ -135,18 +168,18 @@
             flex-direction: column;
             align-items: center;
             box-shadow: 0 2px 8px rgba(47,107,41,0.07);
-            height: 100%;
-            min-height: 400px;/* Ensures all cards are the same height */
+            height: 600px; /* Increased height for better visibility */
+            min-height: 400px;
         }
-        .product-card img {
-            width: 80%;
-            max-width: 220px;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: block;
-        }
+       .product-card img {
+    width: 100%;
+    max-width: 240px;
+    height: 400px;         /* Increasd height for better visibility */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: block;
+}
         .product-card h3 {
             font-size: 1.25rem;
             margin: 10px 0 6px 0;
@@ -289,52 +322,153 @@
             color: #fff !important;
             cursor: not-allowed;
         }
+        @media (max-width: 900px) {
+            .header-bar { flex-direction: column; height: auto; gap: 10px; padding: 0 10px; }
+            .nav-main { gap: 16px; }
+            .nav-right { gap: 14px; }
+        }
         @media (max-width: 700px) {
             .product-grid { grid-template-columns: 1fr; }
             .category-list, .testimonial-list, .trust-badges { flex-direction: column; gap: 18px; }
+            .header-bar { flex-direction: column; gap: 10px; height: auto; }
         }
-
         #whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #25d366;
+            color: #fff;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2em;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+            z-index: 9999;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        #whatsapp-float:hover {
+            background: #128c7e;
+            color: #fff;
+        }
+        .desktop-only { display: flex;
+         }
+      .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1.5em;
+            margin-right: 32px; /* Match .header-bar padding */
+            transition: color 0.2s;}
+        @media (max-width: 900px) {
+            .mobile-menu-btn {
+                display: block !important;
+                margin-right: 32px; /* Consistent spacing on mobile */
+            }
+        }
+      .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; right: 0; /* Change from right: 10px to right: 0 */
+            width: 200px;
+            height: 40vh;
+            background: #2f6b29;
+            color: #fff;
+            flex-direction: column;
+            padding: 60px 24px 24px 24px;
+            z-index: 2000;
+            box-shadow: -2px 0 16px rgba(0,0,0,0.12);
+            transition: right 0.3s;
+}
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.15em;
+            margin-bottom: 24px;
+            display: block;
+            transition: color 0.2s;
+        }
+        .mobile-menu a:hover { color: #FFD700; }
+        .close-mobile-menu {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 2em;
+            cursor: pointer;
+        }
+        @media (max-width: 900px) {
+            .nav-right.desktop-only { display: none; }
+            .mobile-menu-btn { display: block !important; margin-right: 24px; }
+        }
+        @media (max-width: 700px) {
+            .header-bar { flex-direction: row; gap: 0; height: auto; }
+        }
+        .img-modal {
+    display: none;
     position: fixed;
-    bottom: 28px;
-    right: 28px;
-    background: #25d366;
-    color: #fff;
-    border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
+    z-index: 3000;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.85);
     justify-content: center;
-    font-size: 2.2em;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-    z-index: 9999;
-    transition: background 0.2s;
-    text-decoration: none;
+    align-items: center;
 }
-#whatsapp-float:hover {
-    background: #128c7e;
+.img-modal-content {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    display: block;
+    margin: auto;
+}
+.img-modal-close {
+    position: absolute;
+    top: 32px;
+    right: 48px;
     color: #fff;
+    font-size: 2.8em;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 3100;
+    transition: color 0.2s;
 }
+.img-modal-close:hover { color: #FFD700; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>EcoNest</h1>
-    <nav>
-        <a href="../modules/shop_main.php">Shop</a>
-        <a href="../pages/about.html">About</a>
-        <a href="../pages/contact.html">Contact</a>
-        <a href="../modules/register.php">Register</a>
-    </nav>
-   
+    <div class="header-bar">
+        <a href="index.html" class="logo">EcoNest</a>
+        <nav class="nav-main">
+            <a href="../modules/shop_main.php">Shop</a>
+            <a href="../modules/register.php">Register</a>
+        </nav>
+        <div class="nav-right desktop-only">
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html"><i class="fa fa-envelope"></i> Contact</a>
+        </div>
+        <!-- Hamburger menu for mobile -->
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()" style="display:none;cursor:pointer;">
+            <i class="fa fa-bars" style="font-size:1.7em;"></i>
+        </div>
+    </div>
+    <!-- Mobile side menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html"><i class="fa fa-envelope"></i> Contact</a>
+        <span class="close-mobile-menu" onclick="toggleMobileMenu()">&times;</span>
+    </div>
 </header>
- <form class="search-bar" action="../modules/shop_main.php" method="get">
+<form class="search-bar" action="../modules/shop_main.php" method="get">
         <input type="text" name="search" placeholder="Search for products..." />
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
-
 <section id="hero">
     <h2>Eco-Friendly Living Starts Here 🌿</h2>
     <p>Shop sustainable products and support a cleaner planet.</p>
@@ -344,12 +478,12 @@
 <section class="categories">
     <h3>Shop by Category</h3>
     <div class="category-list">
-        <div  class="category-item" data-category="bamboo">Bamboo Products</div>
-        <div class="category-item" data-category="beeswax">Beeswax Products</div>
-        <div class="category-item" data-category="Reusable Products">Reusable Products</div>
-        <div class="category-item" data-category="Compostable Products">Compostable Products</div>
-        <div class="category-item" data-category="Upcycled Products">Upcycled Products</div>
-        <div class="category-item" data-category="Natural Skincare">Natural Skincare</div>
+        <div class="category-item" data-category="bamboo">Bamboo Essentials</div>
+        <div class="category-item" data-category="beeswax">Beeswax Wraps & Care</div>
+        <div class="category-item" data-category="reusable">Reusable Home Goods</div>
+        <div class="category-item" data-category="compostable">Compostable Kitchenware</div>
+        <div class="category-item" data-category="upcycled">Upcycled Crafts</div>
+        <div class="category-item" data-category="skincare">Natural Skincare & Beauty</div>
     </div>
 </section>
 
@@ -357,7 +491,7 @@
     <h2>Featured Products</h2>
     <div id="featured-products" class="product-grid">
         <div class="product-card">
-            <img src="../images/bamboo-toothbrush.jpg" alt="Bamboo Toothbrush">
+            <img src="../images/bamboo-toothbrush.jpg" alt="Bamboo Toothbrush" class="popup-img" style="cursor:pointer;">
             <h3>Bamboo Toothbrush</h3>
             <div class="star-rating">
                 <i class="fa fa-star selected"></i>
@@ -376,7 +510,7 @@
             <button class="btn add-to-cart-btn" title="Login to add to cart">Add to Cart</button>
         </div>
         <div class="product-card">
-            <img src="../images/beeswax-wrap.jpg" alt="Beeswax Wrap">
+            <img src="../images/beeswax-wrap.jpg" alt="Beeswax Wrap" class="popup-img" style="cursor:pointer;">
             <h3>Beeswax Wrap</h3>
             <div class="star-rating">
                 <i class="fa fa-star selected"></i>
@@ -395,7 +529,7 @@
             <button class="btn add-to-cart-btn" title="Login to add to cart">Add to Cart</button>
         </div>
         <div class="product-card">
-            <img src="../images/reusable-bag.jpg" alt="Reusable Bag">
+            <img src="../images/reusable-bag.jpg" alt="Reusable Bag" class="popup-img" style="cursor:pointer;">
             <h3>Reusable Bag</h3>
             <div class="star-rating">
                 <i class="fa fa-star selected"></i>
@@ -414,7 +548,7 @@
             <button class="btn add-to-cart-btn" title="Login to add to cart">Add to Cart</button>
         </div>
         <div class="product-card">
-            <img src="../images/compost.jpg" alt="Compost Bag">
+            <img src="../images/compost.jpg" alt="Compost Bag" class="popup-img" style="cursor:pointer;">
             <h3>Compost Bag</h3>
             <div class="star-rating">
                 <i class="fa fa-star selected"></i>
@@ -470,23 +604,29 @@
 
 <footer>
     <div class="footer-links">
-        <a href="../pages/about.html">About</a>
-        <a href="../pages/contact.html">Contact</a>
-        <a href="../modules/register.php">Register</a>
-        <a href="../pages/FAQ.html">FAQ</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="faq.html">FAQ</a>
         <a href="../modules/shop_main.php">Shop</a>
+        <a href="../modules/register.php">Register</a>
     </div>
-   <div class="footer-social">
-    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-</div>
+    <div class="footer-social">
+        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
     <p>&copy; 2025 EcoNest. All rights reserved.</p>
 </footer>
 
 <a href="https://wa.me/254799422635?text=Hello%20EcoNest%20  " target="_blank" id="whatsapp-float" title="Chat with us on WhatsApp">
     <i class="fab fa-whatsapp"></i>
 </a>
+
+<!-- Fullscreen Image Popup Modal -->
+<div id="imgModal" class="img-modal">
+    <span class="img-modal-close" onclick="closeImgModal()">&times;</span>
+    <img class="img-modal-content" id="imgModalContent" src="" alt="Product Full Size">
+</div>
 
 <script>
 function showNewsletterMsg() {
@@ -510,8 +650,36 @@ document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
         e.preventDefault();
         alert('Please login or create an account to add products to your cart.');
-        window.location.href = '../modules/login.php';
+        window.location.href = '../modules/register.php';
     });
+});
+
+function toggleMobileMenu() {
+    var menu = document.getElementById('mobileMenu');
+    if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+        document.body.style.overflow = '';
+    } else {
+        menu.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Image popup logic
+document.querySelectorAll('.popup-img').forEach(function(img) {
+    img.addEventListener('click', function() {
+        var modal = document.getElementById('imgModal');
+        var modalImg = document.getElementById('imgModalContent');
+        modalImg.src = this.src;
+        modal.style.display = 'flex';
+    });
+});
+function closeImgModal() {
+    document.getElementById('imgModal').style.display = 'none';
+}
+// Optional: close modal on background click
+document.getElementById('imgModal').addEventListener('click', function(e) {
+    if (e.target === this) closeImgModal();
 });
 </script>
 </body>

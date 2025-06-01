@@ -1,6 +1,7 @@
 <?php
 $status = $_GET['status'] ?? '';
 $message = $_GET['message'] ?? '';
+$emailMsg = $_GET['emailmsg'] ?? '';
 $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
 ?>
 <!DOCTYPE html>
@@ -58,6 +59,14 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
             font-size: 1.1rem;
             margin-bottom: 20px;
         }
+        .email-message {
+            color: #2f6b29;
+            font-size: 1rem;
+            margin-bottom: 18px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 10px 0;
+        }
         .progress-container {
             width: 100%;
             background: #e0e0e0;
@@ -101,6 +110,9 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
             <div class="icon success">&#10003;</div>
             <div class="card-title">Payment Successful</div>
             <div class="card-message"><?php echo htmlspecialchars($message ?: 'Your order has been placed successfully.'); ?></div>
+            <?php if ($emailMsg): ?>
+                <div class="email-message"><?php echo htmlspecialchars($emailMsg); ?></div>
+            <?php endif; ?>
             <div class="progress-container">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
