@@ -290,13 +290,17 @@ function fillAddressFromLatLng(latlng) {
     geocoder.geocode({ location: latlng }, function(results, status) {
         if (status === 'OK' && results[0]) {
             document.getElementById('addressInput').value = results[0].formatted_address;
-            // Try to extract city/town from address components
+            // Improved city/town extraction
             let city = '';
+            let county = '';
+            let sublocality = '';
             for (let comp of results[0].address_components) {
                 if (comp.types.includes('locality')) city = comp.long_name;
-                if (comp.types.includes('administrative_area_level_2') && !city) city = comp.long_name;
+                if (comp.types.includes('administrative_area_level_2')) county = comp.long_name;
+                if (comp.types.includes('sublocality')) sublocality = comp.long_name;
             }
-            document.getElementById('cityInput').value = city;
+            // Prefer city, then sublocality, then county
+            document.getElementById('cityInput').value = city || sublocality || county || '';
         }
     });
 }

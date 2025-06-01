@@ -188,6 +188,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="hidden" name="redirect" value="<?php echo htmlspecialchars($_GET['redirect'] ?? ''); ?>">
             <button type="submit">Login</button>
         </form>
+        <div style="text-align:center;margin:32px 0 24px 0;">
+            <div style="font-size:1.1em;color:#2f6b29;font-weight:600;margin-bottom:10px;letter-spacing:0.5px;">
+                Or
+            </div>
+            <div id="gSignInWrapper">
+                <div id="g_id_onload"
+                    data-client_id="633377089412-nq4smjp6ugsb5qvi7orvv7kr1epb9hg1.apps.googleusercontent.com"
+                    data-context="signin"
+                    data-ux_mode="redirect"
+                    data-login_uri="http://localhost/e-commerce/EcoNest/modules/google_callback.php"
+                    data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin"
+                    data-type="standard"
+                    data-shape="rectangular"
+                    data-theme="outline"
+                    data-text="signin_with"
+                    data-size="large">
+                </div>
+            </div>
+        </div>
         <p>No account? <a href="../modules/register.php">Register</a></p>
     </div>
 
@@ -207,5 +228,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>&copy; 2025 EcoNest. All rights reserved.</p>
     </footer>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
 </html>
