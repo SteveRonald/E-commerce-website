@@ -459,8 +459,8 @@ if (count($productIds)) {
     <div class="modal-content">
         <span class="close">&times;</span>
         <div class="modal-body">
-            <!-- Left Section: Product Image -->
-            <div class="modal-image">
+            <!-- Left Section: Product Image with 3D tilt effect -->
+            <div class="modal-image" data-tilt data-tilt-max="15" data-tilt-speed="400">
                 <img id="modalImage" src="" alt="Product Image" />
             </div>
 
@@ -729,6 +729,9 @@ document.querySelectorAll('.love-btn').forEach(function(btn) {
     });
 });
 </script>
+
+<!-- Add Vanilla Tilt at the end of your file -->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
 
 </body>
 </html>
