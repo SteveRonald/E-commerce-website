@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transition: background 0.2s;
         }
         .navbar a:hover, .navbar .active {
-            background: #25611f;
+            color: #FFD700;
         }
         .auth-container {
             max-width: 600px;
@@ -157,6 +157,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .navbar-logo { font-size: 1.3em; padding: 10px 0 0 0; }
             .navbar ul { width: 100%; }
             .navbar a { padding: 14px 10px; font-size: 1em; }
+        }
+        .footer-social a:hover {
+            color: #FFD700 !important;
+        }
+        .footer-social a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.3em;
+            margin: 0 12px;
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATRKrClVAx58qZ-4MrTBp4q42pHwMT1xc&libraries=places"></script>
@@ -238,6 +247,19 @@ document.getElementById('showMapBtn').onclick = function() {
     if (!map) initMap();
 };
 
+// Optional: Autocomplete for address input
+autocomplete = new google.maps.places.Autocomplete(document.getElementById('addressInput'));
+autocomplete.addListener('place_changed', function() {
+    let place = autocomplete.getPlace();
+    if (place.geometry) {
+        if (map && marker) {
+            map.setCenter(place.geometry.location);
+            marker.setPosition(place.geometry.location);
+        }
+        fillAddressFromLatLng(place.geometry.location);
+    }
+});
+
 function initMap() {
     geocoder = new google.maps.Geocoder();
     let defaultLatLng = { lat: -1.286389, lng: 36.817223 }; // Nairobi default
@@ -273,17 +295,6 @@ function initMap() {
     marker.addListener('dragend', function(e) {
         fillAddressFromLatLng(e.latLng);
     });
-
-    // Optional: Autocomplete for address input
-    autocomplete = new google.maps.places.Autocomplete(document.getElementById('addressInput'));
-    autocomplete.addListener('place_changed', function() {
-        let place = autocomplete.getPlace();
-        if (place.geometry) {
-            map.setCenter(place.geometry.location);
-            marker.setPosition(place.geometry.location);
-            fillAddressFromLatLng(place.geometry.location);
-        }
-    });
 }
 
 function fillAddressFromLatLng(latlng) {
@@ -307,10 +318,10 @@ function fillAddressFromLatLng(latlng) {
 </script>
     <footer style="background:#2f6b29;color:#fff;padding:24px 0;text-align:center;">
         <p style="margin:0;font-size:1.2em;">Follow us on social media</p>
- <div style="margin: 12px 0; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
-            <a href="#" title="Facebook" style="color:#fff;font-size:1.3em;"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" title="Twitter" style="color:#fff;font-size:1.3em;"><i class="fab fa-twitter"></i></a>
-            <a href="#" title="Instagram" style="color:#fff;font-size:1.3em;"><i class="fab fa-instagram"></i></a>
+ <div class="footer-social" style="margin: 12px 0; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
         <p>&copy; 2025 EcoNest. All rights reserved.</p>
     </footer>

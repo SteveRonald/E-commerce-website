@@ -354,20 +354,11 @@
             background: #128c7e;
             color: #fff;
         }
-        .desktop-only { display: flex;
-         }
-      .mobile-menu-btn {
-            display: none;
-            cursor: pointer;
-            color: #fff;
-            font-size: 1.5em;
-            margin-right: 32px; /* Match .header-bar padding */
-            transition: color 0.2s;}
+        .desktop-only { display: flex; }
+.mobile-menu-btn { display: none; }
         @media (max-width: 900px) {
-            .mobile-menu-btn {
-                display: block !important;
-                margin-right: 32px; /* Consistent spacing on mobile */
-            }
+            .desktop-only { display: none !important; }
+            .mobile-menu-btn { display: block !important; }
         }
       .mobile-menu {
             display: none;
@@ -443,7 +434,7 @@
 <header>
     <div class="header-bar">
         <a href="index.html" class="logo">EcoNest</a>
-        <nav class="nav-main">
+        <nav class="nav-main desktop-only">
             <a href="../modules/shop_main.php">Shop</a>
             <a href="../modules/register.php">Register</a>
         </nav>
@@ -453,22 +444,25 @@
             <a href="contact.html"><i class="fa fa-envelope"></i> Contact</a>
         </div>
         <!-- Hamburger menu for mobile -->
-        <div class="mobile-menu-btn" onclick="toggleMobileMenu()" style="display:none;cursor:pointer;">
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
             <i class="fa fa-bars" style="font-size:1.7em;"></i>
         </div>
     </div>
     <!-- Mobile side menu -->
     <div id="mobileMenu" class="mobile-menu">
+        <a href="../modules/shop_main.php">Shop</a>
+        <a href="../modules/register.php">Register</a>
         <a href="about.html">About</a>
         <a href="faq.html">FAQ</a>
         <a href="contact.html"><i class="fa fa-envelope"></i> Contact</a>
         <span class="close-mobile-menu" onclick="toggleMobileMenu()">&times;</span>
     </div>
 </header>
-<form class="search-bar" action="../modules/shop_main.php" method="get">
-        <input type="text" name="search" placeholder="Search for products..." />
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+<form class="search-bar" id="siteSearchForm" action="../modules/site_search.php" method="get" onsubmit="return false;">
+    <input type="text" name="search" id="siteSearchInput" placeholder="Search for products, info, or help..." autocomplete="off" />
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+<div id="siteSearchResults" style="max-width:400px;margin:0 auto 20px auto;"></div>
 <section id="hero">
     <h2>Eco-Friendly Living Starts Here 🌿</h2>
     <p>Shop sustainable products and support a cleaner planet.</p>
@@ -680,6 +674,36 @@ function closeImgModal() {
 // Optional: close modal on background click
 document.getElementById('imgModal').addEventListener('click', function(e) {
     if (e.target === this) closeImgModal();
+});
+
+document.getElementById('siteSearchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const q = document.getElementById('siteSearchInput').value.trim();
+    if (!q) return;
+    const resultsBox = document.getElementById('siteSearchResults');
+    resultsBox.innerHTML = '<div style="color:#2f6b29;">Searching...</div>';
+    fetch('../modules/site_search.php?q=' + encodeURIComponent(q))
+        .then(res => res.json())
+        .then(data => {
+            if (data.results && data.results.length) {
+                resultsBox.innerHTML = data.results.map(r =>
+                    `<div style="background:#fff;border-radius:8px;padding:12px 16px;margin-bottom:10px;box-shadow:0 2px 8px #2f6b2912;">
+                        <b>${r.title}</b><br>
+                        <span style="font-size:0.98em;color:#256021;">${r.summary}</span><br>
+                        <a href="${r.link}" style="color:#2f6b29;text-decoration:underline;">View More</a>
+                    </div>`
+                ).join('');
+            } else if (data.summary) {
+                resultsBox.innerHTML = `<div style="background:#fff;border-radius:8px;padding:12px 16px;box-shadow:0 2px 8px #2f6b2912;">
+                    <span style="font-size:1.05em;color:#256021;">${data.summary}</span>
+                </div>`;
+            } else {
+                resultsBox.innerHTML = '<div style="color:#e74c3c;">No results found.</div>';
+            }
+        })
+        .catch(() => {
+            resultsBox.innerHTML = '<div style="color:#e74c3c;">Error searching. Please try again.</div>';
+        });
 });
 </script>
 </body>

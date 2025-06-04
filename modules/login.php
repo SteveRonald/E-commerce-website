@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transition: background 0.2s;
         }
         .navbar a:hover, .navbar .active {
-            background: #25611f;
+            color: #FFD700;
         }
         
         .auth-container {
@@ -162,6 +162,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .navbar ul { width: 100%; }
             .navbar a { padding: 14px 10px; font-size: 1em; }
         }
+        #gSignInWrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .g_id_signin {
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .g_id_signin button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .g_id_signin button:hover {
+            background-color: #357ae8;
+        }
+        .auth-container a {
+            color: #2f6b29;
+            text-decoration: none;
+            transition: text-decoration 0.2s;
+        }
+        .auth-container a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -210,6 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
         <p>No account? <a href="../modules/register.php">Register</a></p>
+        <p>forgot password? <a href="../modules/reset_password.php">Reset it</a></p>
     </div>
 
     <footer  style="background-color: #2f6b29; color: white; text-align: center; padding: 30px 10px 18px 10px; font-size: 1rem;">
