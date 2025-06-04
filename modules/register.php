@@ -167,6 +167,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 1.3em;
             margin: 0 12px;
         }
+          #gSignInWrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .g_id_signin {
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .g_id_signin button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .g_id_signin button:hover {
+            background-color: #357ae8;
+        }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATRKrClVAx58qZ-4MrTBp4q42pHwMT1xc&libraries=places"></script>
 </head>
