@@ -285,15 +285,22 @@ if ($page === 'admins') {
     <link rel="stylesheet" href="../css/style.css">
     <style>
         body { background: #f4f4f4; margin:0; font-family: 'Segoe UI', Arial, sans-serif; }
-        .admin-layout { display: flex; min-height: 100vh; }
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+            height: 100vh; /* Make sure the layout fills the viewport */
+            overflow: hidden; /* Prevent body scroll */
+        }
         .sidebar {
             width: 220px;
             background: #2f6b29;
             color: #fff;
             display: flex;
             flex-direction: column;
-            padding-top: 0;
             min-height: 100vh;
+            height: 100vh;
+            position: relative;
+            z-index: 2;
         }
         .sidebar .logo {
             font-size: 1.7em;
@@ -336,9 +343,10 @@ if ($page === 'admins') {
         }
         .main-content {
             flex: 1;
-            padding: 0 0 40px 0;
             display: flex;
             flex-direction: column;
+            height: 100vh;
+            overflow: hidden; /* Prevent main-content from scrolling, only inner scrolls */
         }
         .topbar {
             background: #fff;
@@ -347,6 +355,8 @@ if ($page === 'admins') {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-shrink: 0;
+            z-index: 3;
         }
         .topbar .admin-info {
             color: #2f6b29;
@@ -355,11 +365,14 @@ if ($page === 'admins') {
         }
         .admin-container {
             max-width: 1200px;
-            margin: 30px auto 0 auto;
+            margin: 0 auto;
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             padding: 30px 30px 30px 30px;
+            flex: 1 1 auto;
+            overflow-y: auto;
+            height: 0; /* Allows flexbox to control height */
         }
         h2 { color: #2f6b29; margin-bottom: 18px; }
         table {

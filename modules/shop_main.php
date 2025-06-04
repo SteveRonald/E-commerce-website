@@ -21,6 +21,15 @@ if (count($productIds)) {
         $productLoves[$row['product_id']] = $row['total_loves'];
     }
 }
+
+$selectedCategory = isset($_GET['category']) ? strtolower(trim($_GET['category'])) : '';
+if ($selectedCategory) {
+    $products = array_filter($products, function($p) use ($selectedCategory) {
+        return strtolower($p['category']) === $selectedCategory;
+    });
+    // Re-index array for clean foreach
+    $products = array_values($products);
+}
 ?>
 
 <!DOCTYPE html>
@@ -520,42 +529,6 @@ if (count($productIds)) {
 </footer>
 
 <script>
-    (function () {
-        const productGrid = document.getElementById('productGrid');
-        const noProductsMessage = document.getElementById('noProductsMessage');
-        const productCards = Array.from(productGrid.getElementsByClassName('product-card'));
-        const categoryLinks = document.querySelectorAll('.sidebar ul li a');
-
-        function filterProductsByCategory(category) {
-            let visibleCount = 0;
-            productCards.forEach(card => {
-                const productCategory = card.getAttribute('data-category');
-                if (category === productCategory || category === '') {
-                    card.style.display = '';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            noProductsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
-        }
-
-        // Add click event listeners to category links
-        categoryLinks.forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const category = this.getAttribute('data-category');
-                filterProductsByCategory(category);
-            });
-        });
-
-        // Show the first category by default
-        filterProductsByCategory('bamboo');
-    })();
-</script>
-
-<script>
     // Get modal elements
     const modal = document.getElementById('productModal');
     const modalImage = document.getElementById('modalImage');
@@ -740,6 +713,59 @@ document.querySelectorAll('.love-btn').forEach(function(btn) {
 
 <!-- Add Vanilla Tilt at the end of your file -->
 <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+<script>
+(function () {
+    const productGrid = document.getElementById('productGrid');
+    const noProductsMessage = document.getElementById('noProductsMessage');
+    const productCards = Array.from(productGrid.getElementsByClassName('product-card'));
+    const categoryLinks = document.querySelectorAll('.sidebar ul li a');
+
+    function filterProductsByCategory(category) {
+        let visibleCount = 0;
+        productCards.forEach(card => {
+            const productCategory = card.getAttribute('data-category');
+            if (category === '' || category === productCategory) {
+                card.style.display = '';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        noProductsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+
+        // Highlight selected category in sidebar
+        categoryLinks.forEach(link => {
+            if (link.getAttribute('data-category') === category) {
+                link.style.fontWeight = 'bold';
+                link.style.color = '#FFD700';
+            } else {
+                link.style.fontWeight = '';
+                link.style.color = '';
+            }
+        });
+    }
+
+    // Add click event listeners to category links
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const category = this.getAttribute('data-category');
+            // Update URL without reloading
+            const url = new URL(window.location);
+            url.searchParams.set('category', category);
+            window.history.replaceState({}, '', url);
+            filterProductsByCategory(category);
+        });
+    });
+
+    // On page load, filter by category from URL if present
+    function getCategoryFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('category') ? params.get('category').toLowerCase() : '';
+    }
+    filterProductsByCategory(getCategoryFromUrl());
+})();
+</script>
 
 </body>
 </html>
