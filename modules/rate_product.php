@@ -13,7 +13,7 @@ if ($product_id && $rating >= 1 && $rating <= 5) {
     } else {
         $conn->query("INSERT INTO product_ratings (product_id, rating) VALUES ($product_id, $rating)");
     }
-    echo json_encode(['success'=>true]);
+    echo json_encode(['success' => true]);
 } else {
-    echo json_encode(['success'=>false, 'message'=>'Invalid data']);
+    echo json_encode(['success' => false, 'message' => 'Invalid data']);
 }

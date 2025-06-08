@@ -18,4 +18,3 @@ if ($checkoutRequestID) {
 }
 
 echo json_encode(["ResultCode" => 0, "ResultDesc" => "Accepted"]);
-?>

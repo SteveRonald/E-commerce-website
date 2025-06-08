@@ -13,7 +13,8 @@ if ($conn->connect_error) {
 $msg = "";
 $success_reset = false;
 
-function generateOTP($length = 6) {
+function generateOTP($length = 6)
+{
     return str_pad(random_int(0, 999999), $length, '0', STR_PAD_LEFT);
 }
 
@@ -84,6 +85,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Reset Password | EcoNest</title>
@@ -91,14 +93,19 @@ $conn->close();
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #f4f4f4; margin:0; }
+        body {
+            background: #f4f4f4;
+            margin: 0;
+        }
+
         .navbar {
             width: 100%;
             background: #2f6b29;
             padding: 0;
             margin: 0 0 30px 0;
-            box-shadow: 0 2px 8px rgba(47,107,41,0.06);
+            box-shadow: 0 2px 8px rgba(47, 107, 41, 0.06);
         }
+
         .navbar-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -107,6 +114,7 @@ $conn->close();
             justify-content: space-between;
             padding: 0 24px;
         }
+
         .navbar-logo {
             font-size: 2em;
             font-weight: bold;
@@ -115,6 +123,7 @@ $conn->close();
             font-family: 'Segoe UI', Arial, sans-serif;
             padding: 0 10px;
         }
+
         .navbar ul {
             list-style: none;
             margin: 0;
@@ -122,9 +131,11 @@ $conn->close();
             display: flex;
             align-items: center;
         }
+
         .navbar li {
             margin: 0;
         }
+
         .navbar a {
             display: block;
             color: #fff;
@@ -135,26 +146,32 @@ $conn->close();
             border-radius: 4px;
             transition: background 0.2s;
         }
-        .navbar a:hover, .navbar .active {
+
+        .navbar a:hover,
+        .navbar .active {
             color: #FFD700;
         }
+
         .auth-container {
             max-width: 400px;
             margin: 50px auto;
             background: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             padding: 30px 40px 20px 40px;
         }
+
         .auth-container h2 {
             color: #2f6b29;
             margin-bottom: 20px;
             text-align: center;
         }
+
         .auth-container label {
             font-weight: 600;
             color: #2f6b29;
         }
+
         .auth-container input[type="email"],
         .auth-container input[type="password"],
         .auth-container input[type="text"] {
@@ -165,6 +182,7 @@ $conn->close();
             border-radius: 6px;
             font-size: 1rem;
         }
+
         .auth-container button {
             width: 100%;
             background: #2f6b29;
@@ -178,9 +196,11 @@ $conn->close();
             margin-top: 10px;
             transition: background 0.3s;
         }
+
         .auth-container button:hover {
             background: #5d8c56;
         }
+
         .auth-container .msg {
             color: #27ae60;
             background: #eafaf1;
@@ -191,6 +211,7 @@ $conn->close();
             text-align: center;
             font-weight: 600;
         }
+
         .auth-container .error {
             color: #e74c3c;
             background: #fbeaea;
@@ -201,53 +222,73 @@ $conn->close();
             text-align: center;
             font-weight: 600;
         }
+
         .auth-container p {
             text-align: center;
             margin-top: 18px;
         }
+
         .auth-container a {
             color: #2f6b29;
             text-decoration: underline;
         }
+
         @media (max-width: 700px) {
-            .auth-container { max-width: 98vw; padding: 18px 5vw 10px 5vw; }
-            .navbar-content { flex-direction: column; align-items: flex-start; padding: 0 8px; }
-            .navbar-logo { font-size: 1.3em; padding: 10px 0 0 0; }
-            .navbar ul { width: 100%; }
-            .navbar a { padding: 14px 10px; font-size: 1em; }
+            .auth-container {
+                max-width: 98vw;
+                padding: 18px 5vw 10px 5vw;
+            }
+
+            .navbar-content {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0 8px;
+            }
+
+            .navbar-logo {
+                font-size: 1.3em;
+                padding: 10px 0 0 0;
+            }
+
+            .navbar ul {
+                width: 100%;
+            }
+
+            .navbar a {
+                padding: 14px 10px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="navbar-content">
             <span class="navbar-logo">EcoNest 🌿</span>
             <ul>
                 <li><a href="../pages/index.html">Home</a></li>
-                <li><a href="../modules/shop_main.php">Shop</a></li>
-                <li><a href="../modules/cart.php">Cart</a></li>
-                <li><a href="../modules/register.php">Register</a></li>
-                <li><a href="../modules/login.php">Login</a></li>
+                <li><a href="../pages/about.html">About</a></li>
             </ul>
         </div>
     </nav>
     <div class="auth-container">
         <h2>Reset Password</h2>
         <?php
-            // Destroy session only after showing the success message
-            if ($success_reset) {
-                session_unset();
-                session_destroy();
-            }
+        // Destroy session only after showing the success message
+        if ($success_reset) {
+            session_unset();
+            session_destroy();
+        }
         ?>
         <!-- Step 1: Enter Email -->
-        <?php if (!$success_reset && !isset($_SESSION["email"])): ?> 
+        <?php if (!$success_reset && !isset($_SESSION["email"])): ?>
             <form method="POST" autocomplete="off">
                 <label>Email:</label>
                 <input type="email" name="email" required>
                 <button type="submit" name="send_otp">Send OTP</button>
             </form>
-        <!-- Step 2: Enter OTP + New Password -->
+            <!-- Step 2: Enter OTP + New Password -->
         <?php elseif (!$success_reset): ?>
             <form method="POST" autocomplete="off">
                 <label>Enter OTP:</label>
@@ -274,6 +315,7 @@ $conn->close();
             <a href="login.php"><i class="fa fa-arrow-left"></i> Back to Login</a>
         </p>
     </div>
-   
+
 </body>
+
 </html>

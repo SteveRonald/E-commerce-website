@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/png" href="../images/logo.jpg">
     <style>
-        body { background: #f4f4f4; margin: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        body {
+            background: #f4f4f4;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
         header {
             background: #2f6b29;
             color: #fff;
             padding: 24px 0 12px 0;
             text-align: center;
         }
+
         nav {
             margin-top: 10px;
         }
+
         nav a {
             color: #fff;
             text-decoration: none;
@@ -25,30 +33,38 @@
             font-size: 1.08em;
             transition: color 0.2s;
         }
-        nav a:hover { color: #FFD700; }
+
+        nav a:hover {
+            color: #FFD700;
+        }
+
         .faq-container {
             max-width: 700px;
             margin: 40px auto 60px auto;
             background: #fff;
             border-radius: 14px;
-            box-shadow: 0 4px 24px rgba(47,107,41,0.09);
+            box-shadow: 0 4px 24px rgba(47, 107, 41, 0.09);
             padding: 36px 28px;
         }
+
         .faq-title {
             color: #2f6b29;
             text-align: center;
             margin-bottom: 32px;
             font-size: 2.1em;
         }
+
         .faq-list {
             margin: 0;
             padding: 0;
             list-style: none;
         }
+
         .faq-item {
             border-bottom: 1px solid #e0e0e0;
             padding: 18px 0;
         }
+
         .faq-question {
             font-size: 1.13em;
             font-weight: 500;
@@ -59,7 +75,11 @@
             justify-content: space-between;
             transition: color 0.2s;
         }
-        .faq-question:hover { color: #2f6b29; }
+
+        .faq-question:hover {
+            color: #2f6b29;
+        }
+
         .faq-answer {
             display: none;
             color: #333;
@@ -68,23 +88,35 @@
             line-height: 1.6;
             padding-left: 6px;
         }
+
         .faq-item.active .faq-answer {
             display: block;
             animation: fadeIn 0.4s;
         }
+
         .faq-toggle {
             font-size: 1.2em;
             color: #2f6b29;
             margin-left: 12px;
             transition: transform 0.2s;
         }
+
         .faq-item.active .faq-toggle {
             transform: rotate(90deg);
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-8px);}
-            to { opacity: 1; transform: translateY(0);}
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         footer {
             background-color: #2f6b29;
             color: white;
@@ -92,131 +124,157 @@
             padding: 30px 10px 18px 10px;
             font-size: 1rem;
         }
-        .footer-links, .footer-social {
+
+        .footer-links,
+        .footer-social {
             margin: 12px 0;
             display: flex;
             justify-content: center;
             gap: 24px;
             flex-wrap: wrap;
         }
-        .footer-links a, .footer-social a {
+
+        .footer-links a,
+        .footer-social a {
             color: #fff;
             text-decoration: none;
             font-size: 1.08em;
             transition: color 0.2s;
         }
-        .footer-links a:hover, .footer-social a:hover { color: #FFD700; }
-        .footer-social a { font-size: 1.3em; }
+
+        .footer-links a:hover,
+        .footer-social a:hover {
+            color: #FFD700;
+        }
+
+        .footer-social a {
+            font-size: 1.3em;
+        }
+
         @media (max-width: 700px) {
-            .faq-container { padding: 18px 6vw; }
+            .faq-container {
+                padding: 18px 6vw;
+            }
         }
     </style>
 </head>
+
 <body>
-<header>
-    <h1>EcoNest</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="../modules/shop_main.php">Shop</a>
-        <a href="../modules/register.php">Register</a>
-    </nav>
-</header>
+    <header>
+        <h1>EcoNest</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="../modules/shop_main.php">Shop</a>
+            <a href="../modules/register.php">Register</a>
+        </nav>
+    </header>
 
-<div class="faq-container">
-    <div class="faq-title"><i class="fa fa-question-circle"></i> Frequently Asked Questions</div>
-    <ul class="faq-list">
-        <li class="faq-item">
-            <div class="faq-question">
-                What is EcoNest?
-                <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
-            </div>
-            <div class="faq-answer">
-                EcoNest is an online store dedicated to providing eco-friendly, sustainable products for your home and lifestyle. We believe in making it easy for everyone to live greener!
-            </div>
-        </li>
-        <li class="faq-item">
-            <div class="faq-question">
-                How do I place an order?
-                <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
-            </div>
-            <div class="faq-answer">
-                Simply browse our shop, add your favorite products to the cart, and proceed to checkout. You’ll need to create an account or log in to complete your purchase.
-            </div>
-        </li>
-        <li class="faq-item">
-            <div class="faq-question">
-                What payment methods do you accept?
-                <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
-            </div>
-            <div class="faq-answer">
-                We accept M-Pesa, Visa, Mastercard, and secure online payments. All transactions are encrypted for your safety.
-            </div>
-        </li>
-        <li class="faq-item">
-            <div class="faq-question">
-                How long does delivery take?
-                <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
-            </div>
-            <div class="faq-answer">
-                Orders within Kenya are delivered within 2-4 business days. You’ll receive a tracking link once your order is shipped.
-            </div>
-        </li>
-        <li class="faq-item">
-            <div class="faq-question">
-                Can I return or exchange a product?
-                <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
-            </div>
-            <div class="faq-answer">
-                Yes! If you’re not satisfied, you can return or exchange your product within 7 days of delivery. Please see our <a href="contact.html" style="color:#2f6b29;text-decoration:underline;">returns policy</a> for details.
-            </div>
-        </li>
-        <li class="faq-item">
-            <div class="faq-question">
-                Are your products really eco-friendly?
-                <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
-            </div>
-            <div class="faq-answer">
-                Absolutely. All our products are carefully selected for their sustainability, biodegradability, or upcycled nature. We work with trusted suppliers who share our green values.
-            </div>
-        </li>
-        <li class="faq-item">
-            <div class="faq-question">
-                How can I contact EcoNest?
-                <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
-            </div>
-            <div class="faq-answer">
-                You can reach us via our <a href="contact.html" style="color:#2f6b29;text-decoration:underline;">contact page</a> or email us at <a href="mailto:support@econest.co.ke" style="color:#2f6b29;text-decoration:underline;">support@econest.co.ke</a>.
-            </div>
-        </li>
-    </ul>
-</div>
-
-<footer>
-    <div class="footer-links">
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="../modules/register.php">Register</a>
-        <a href="../modules/shop_main.php">Shop</a>
+    <div class="faq-container">
+        <div class="faq-title"><i class="fa fa-question-circle"></i> Frequently Asked Questions</div>
+        <ul class="faq-list">
+            <li class="faq-item">
+                <div class="faq-question">
+                    What is EcoNest?
+                    <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
+                </div>
+                <div class="faq-answer">
+                    EcoNest is an online store dedicated to providing eco-friendly, sustainable products for your home
+                    and lifestyle. We believe in making it easy for everyone to live greener!
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">
+                    How do I place an order?
+                    <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
+                </div>
+                <div class="faq-answer">
+                    Simply browse our shop, add your favorite products to the cart, and proceed to checkout. You’ll need
+                    to create an account or log in to complete your purchase.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">
+                    What payment methods do you accept?
+                    <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
+                </div>
+                <div class="faq-answer">
+                    We accept M-Pesa, Visa, Mastercard, and secure online payments. All transactions are encrypted for
+                    your safety.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">
+                    How long does delivery take?
+                    <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
+                </div>
+                <div class="faq-answer">
+                    Orders within Kenya are delivered within 2-4 business days. You’ll receive a tracking link once your
+                    order is shipped.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">
+                    Can I return or exchange a product?
+                    <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
+                </div>
+                <div class="faq-answer">
+                    Yes! If you’re not satisfied, you can return or exchange your product within 7 days of delivery.
+                    Please see our <a href="contact.html" style="color:#2f6b29;text-decoration:underline;">returns
+                        policy</a> for details.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">
+                    Are your products really eco-friendly?
+                    <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely. All our products are carefully selected for their sustainability, biodegradability, or
+                    upcycled nature. We work with trusted suppliers who share our green values.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">
+                    How can I contact EcoNest?
+                    <span class="faq-toggle"><i class="fa fa-chevron-right"></i></span>
+                </div>
+                <div class="faq-answer">
+                    You can reach us via our <a href="contact.html"
+                        style="color:#2f6b29;text-decoration:underline;">contact page</a> or email us at <a
+                        href="mailto:support@econest.co.ke"
+                        style="color:#2f6b29;text-decoration:underline;">support@econest.co.ke</a>.
+                </div>
+            </li>
+        </ul>
     </div>
-    <div class="footer-social">
-        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-    </div>
-    <p>&copy; 2025 EcoNest. All rights reserved.</p>
-</footer>
 
-<script>
-document.querySelectorAll('.faq-question').forEach(function(q) {
-    q.addEventListener('click', function() {
-        const item = this.parentElement;
-        item.classList.toggle('active');
-        // Optionally close others:
-        document.querySelectorAll('.faq-item').forEach(function(other) {
-            if (other !== item) other.classList.remove('active');
+    <footer>
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="../modules/register.php">Register</a>
+            <a href="../modules/shop_main.php">Shop</a>
+        </div>
+        <div class="footer-social">
+            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 EcoNest. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(function (q) {
+            q.addEventListener('click', function () {
+                const item = this.parentElement;
+                item.classList.toggle('active');
+                // Optionally close others:
+                document.querySelectorAll('.faq-item').forEach(function (other) {
+                    if (other !== item) other.classList.remove('active');
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
 </body>
+
 </html>

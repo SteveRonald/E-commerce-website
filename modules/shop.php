@@ -33,6 +33,7 @@ $status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : null;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -209,7 +210,7 @@ $status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : null;
             transition: all 0.3s ease;
         }
 
-        .payment-methods .method input[type="radio"]:checked + img {
+        .payment-methods .method input[type="radio"]:checked+img {
             filter: grayscale(0);
             opacity: 1;
         }
@@ -242,7 +243,7 @@ $status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : null;
             cursor: pointer;
             transition: background-color 0.3s;
             text-align: center;
-            
+
         }
 
         form button:hover {
@@ -331,8 +332,13 @@ $status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : null;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 480px) {
@@ -371,261 +377,263 @@ $status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : null;
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <?php if ($message && $status): ?>
-        <div class="message <?php echo $status; ?>">
-            <?php echo $message; ?>
-        </div>
-    <?php endif; ?>
+    <div class="container">
+        <?php if ($message && $status): ?>
+            <div class="message <?php echo $status; ?>">
+                <?php echo $message; ?>
+            </div>
+        <?php endif; ?>
 
-    <!-- Product Details Section -->
-    <div class="product-details">
-        <h3>Product Details</h3>
-        <div class="product-grid">
-            <div class="product-item">
-                <img src="<?php echo $productImage; ?>" alt="<?php echo $productName; ?>">
+        <!-- Product Details Section -->
+        <div class="product-details">
+            <h3>Product Details</h3>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="<?php echo $productImage; ?>" alt="<?php echo $productName; ?>">
+                </div>
+                <div class="product-item">
+                    <p><strong>Product Name:</strong> <?php echo $productName; ?></p>
+                    <p><strong>Unit Price:</strong> KSh <?php echo number_format($productPrice, 2); ?></p>
+                </div>
+                <div class="product-item">
+                    <p><strong>Color:</strong> <?php echo $productColor; ?></p>
+                    <p><strong>Quantity:</strong> <?php echo $productQuantity; ?></p>
+                </div>
+                <div class="product-item">
+                    <p><strong>Total:</strong> KSh <?php echo number_format($totalPrice, 2); ?></p>
+                </div>
             </div>
-            <div class="product-item">
-                <p><strong>Product Name:</strong> <?php echo $productName; ?></p>
-                <p><strong>Unit Price:</strong> KSh <?php echo number_format($productPrice, 2); ?></p>
+        </div>
+
+        <!-- Payment Methods Section -->
+        <div class="payment-methods">
+            <p class="payment-title">Select Payment Method</p>
+            <div class="methods">
+                <label class="method">
+                    <input type="radio" name="payment_method" value="MPESA" onclick="showPaymentMethod('mpesa')">
+                    <img src="../images/M-PESA-logo-2.png" alt="MPESA" title="MPESA">
+                    <span>MPESA</span>
+                </label>
+                <label class="method">
+                    <input type="radio" name="payment_method" value="Credit Card" onclick="showPaymentMethod('credit_card')">
+                    <img src="../images/credit.jpg" alt="Credit Card" title="Credit Card">
+                    <span>Credit Card</span>
+                </label>
             </div>
-            <div class="product-item">
-                <p><strong>Color:</strong> <?php echo $productColor; ?></p>
-                <p><strong>Quantity:</strong> <?php echo $productQuantity; ?></p>
+        </div>
+
+        <!-- Payment Form -->
+        <form id="paymentForm" action="../modules/process_payment.php" method="POST">
+            <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+            <input type="hidden" name="product_name" value="<?php echo $productName; ?>">
+            <input type="hidden" name="product_price" value="<?php echo $productPrice; ?>">
+            <input type="hidden" name="product_image" value="<?php echo $productImage; ?>">
+            <input type="hidden" name="product_color" value="<?php echo $productColor; ?>">
+            <input type="hidden" name="product_quantity" value="<?php echo $productQuantity; ?>">
+
+            <!-- MPESA Payment Inputs -->
+            <div id="mpesaInputs" style="display: none;">
+                <label for="full_name">Full Name (as it appears on MPESA):</label>
+                <input type="text" id="full_name" name="full_name" required minlength="3">
+                <div id="fullNameError" class="error-message" style="display:none;">Please enter your full name (at least 3 characters).</div>
+
+                <label for="mpesa_number">MPESA Number:</label>
+                <input type="tel" id="mpesa_number" name="mpesa_number" maxlength="10" pattern="^0[7-9][0-9]{8}$" required>
+                <div id="mpesaNumberError" class="error-message" style="display:none;">Please enter a valid MPESA number (e.g. 07XXXXXXXX).</div>
             </div>
-            <div class="product-item">
-                <p><strong>Total:</strong> KSh <?php echo number_format($totalPrice, 2); ?></p>
+
+            <!-- Credit Card Placeholder -->
+            <div id="creditCardInputs" style="display: none;">
+                <p style="text-align: center; color: #888;">Credit Card payment is coming soon!</p>
+            </div>
+
+            <button type="submit" style="display:none;" id="payBtn">Pay KSh <?php echo number_format($totalPrice, 2); ?> Now</button>
+        </form>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal">
+        <div class="modal-content">
+            <h3 class="modal-title">Confirm Payment</h3>
+            <p>Are you sure you want to proceed with the payment?</p>
+            <div id="paymentDetails">
+                <p><strong>Product:</strong> <span id="confirmProductName"></span></p>
+                <p><strong>Price:</strong> KSh <span id="confirmPrice"></span></p>
+                <p><strong>MPESA Number:</strong> <span id="confirmMpesaNumber"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button cancel-button" id="cancelPayment">Cancel</button>
+                <button class="modal-button confirm-button" id="confirmPayment">Confirm Payment</button>
             </div>
         </div>
     </div>
 
-    <!-- Payment Methods Section -->
-    <div class="payment-methods">
-        <p class="payment-title">Select Payment Method</p>
-        <div class="methods">
-            <label class="method">
-                <input type="radio" name="payment_method" value="MPESA" onclick="showPaymentMethod('mpesa')">
-                <img src="../images/M-PESA-logo-2.png" alt="MPESA" title="MPESA">
-                <span>MPESA</span>
-            </label>
-            <label class="method">
-                <input type="radio" name="payment_method" value="Credit Card" onclick="showPaymentMethod('credit_card')">
-                <img src="../images/credit.jpg" alt="Credit Card" title="Credit Card">
-                <span>Credit Card</span>
-            </label>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loadingMessage">Processing your payment. Please wait...</p>
+            <p id="instructionMessage">You will receive an MPESA prompt shortly. Please enter your PIN to complete the transaction.</p>
         </div>
     </div>
 
-    <!-- Payment Form -->
-    <form id="paymentForm" action="../modules/process_payment.php" method="POST">
-        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
-        <input type="hidden" name="product_name" value="<?php echo $productName; ?>">
-        <input type="hidden" name="product_price" value="<?php echo $productPrice; ?>">
-        <input type="hidden" name="product_image" value="<?php echo $productImage; ?>">
-        <input type="hidden" name="product_color" value="<?php echo $productColor; ?>">
-        <input type="hidden" name="product_quantity" value="<?php echo $productQuantity; ?>">
+    <script>
+        // Form validation and submission handling
+        const form = document.getElementById('paymentForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const fullNameInput = document.getElementById('full_name');
+        const mpesaNumberInput = document.getElementById('mpesa_number');
+        const fullNameError = document.getElementById('fullNameError');
+        const mpesaNumberError = document.getElementById('mpesaNumberError');
 
-        <!-- MPESA Payment Inputs -->
-        <div id="mpesaInputs" style="display: none;">
-            <label for="full_name">Full Name (as it appears on MPESA):</label>
-            <input type="text" id="full_name" name="full_name" required minlength="3">
-            <div id="fullNameError" class="error-message" style="display:none;">Please enter your full name (at least 3 characters).</div>
+        // Confirmation modal elements
+        const confirmProductName = document.getElementById('confirmProductName');
+        const confirmPrice = document.getElementById('confirmPrice');
+        const confirmMpesaNumber = document.getElementById('confirmMpesaNumber');
+        const cancelPaymentBtn = document.getElementById('cancelPayment');
+        const confirmPaymentBtn = document.getElementById('confirmPayment');
 
-            <label for="mpesa_number">MPESA Number:</label>
-            <input type="tel" id="mpesa_number" name="mpesa_number" maxlength="10" pattern="^0[7-9][0-9]{8}$" required>
-            <div id="mpesaNumberError" class="error-message" style="display:none;">Please enter a valid MPESA number (e.g. 07XXXXXXXX).</div>
-        </div>
+        // Event listeners for real-time validation
+        fullNameInput.addEventListener('input', validateFullName);
+        mpesaNumberInput.addEventListener('input', validateMpesaNumber);
 
-        <!-- Credit Card Placeholder -->
-        <div id="creditCardInputs" style="display: none;">
-            <p style="text-align: center; color: #888;">Credit Card payment is coming soon!</p>
-        </div>
-
-        <button type="submit" style="display:none;" id="payBtn">Pay KSh <?php echo number_format($totalPrice, 2); ?> Now</button>
-    </form>
-</div>
-
-<!-- Confirmation Modal -->
-<div id="confirmationModal">
-    <div class="modal-content">
-        <h3 class="modal-title">Confirm Payment</h3>
-        <p>Are you sure you want to proceed with the payment?</p>
-        <div id="paymentDetails">
-            <p><strong>Product:</strong> <span id="confirmProductName"></span></p>
-            <p><strong>Price:</strong> KSh <span id="confirmPrice"></span></p>
-            <p><strong>MPESA Number:</strong> <span id="confirmMpesaNumber"></span></p>
-        </div>
-        <div class="modal-footer">
-            <button class="modal-button cancel-button" id="cancelPayment">Cancel</button>
-            <button class="modal-button confirm-button" id="confirmPayment">Confirm Payment</button>
-        </div>
-    </div>
-</div>
-
-<!-- Loading Overlay -->
-<div id="loadingOverlay" class="loading-overlay" style="display: none;">
-    <div class="loading-content">
-        <div class="spinner"></div>
-        <p id="loadingMessage">Processing your payment. Please wait...</p>
-        <p id="instructionMessage">You will receive an MPESA prompt shortly. Please enter your PIN to complete the transaction.</p>
-    </div>
-</div>
-
-<script>
-    // Form validation and submission handling
-    const form = document.getElementById('paymentForm');
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    const confirmationModal = document.getElementById('confirmationModal');
-    const fullNameInput = document.getElementById('full_name');
-    const mpesaNumberInput = document.getElementById('mpesa_number');
-    const fullNameError = document.getElementById('fullNameError');
-    const mpesaNumberError = document.getElementById('mpesaNumberError');
-    
-    // Confirmation modal elements
-    const confirmProductName = document.getElementById('confirmProductName');
-    const confirmPrice = document.getElementById('confirmPrice');
-    const confirmMpesaNumber = document.getElementById('confirmMpesaNumber');
-    const cancelPaymentBtn = document.getElementById('cancelPayment');
-    const confirmPaymentBtn = document.getElementById('confirmPayment');
-
-    // Event listeners for real-time validation
-    fullNameInput.addEventListener('input', validateFullName);
-    mpesaNumberInput.addEventListener('input', validateMpesaNumber);
-
-    // Validate full name
-    function validateFullName() {
-        if (fullNameInput.value.length < 3) {
-            fullNameError.style.display = 'block';
-            fullNameInput.classList.add('invalid');
-            return false;
-        } else {
-            fullNameError.style.display = 'none';
-            fullNameInput.classList.remove('invalid');
-            return true;
+        // Validate full name
+        function validateFullName() {
+            if (fullNameInput.value.length < 3) {
+                fullNameError.style.display = 'block';
+                fullNameInput.classList.add('invalid');
+                return false;
+            } else {
+                fullNameError.style.display = 'none';
+                fullNameInput.classList.remove('invalid');
+                return true;
+            }
         }
-    }
 
-    // Validate MPESA number
-    function validateMpesaNumber() {
-        const mpesaRegex = /^0[7-9][0-9]{8}$/;
-        if (!mpesaRegex.test(mpesaNumberInput.value)) {
-            mpesaNumberError.style.display = 'block';
-            mpesaNumberInput.classList.add('invalid');
-            return false;
-        } else {
-            mpesaNumberError.style.display = 'none';
-            mpesaNumberInput.classList.remove('invalid');
-            return true;
+        // Validate MPESA number
+        function validateMpesaNumber() {
+            const mpesaRegex = /^0[7-9][0-9]{8}$/;
+            if (!mpesaRegex.test(mpesaNumberInput.value)) {
+                mpesaNumberError.style.display = 'block';
+                mpesaNumberInput.classList.add('invalid');
+                return false;
+            } else {
+                mpesaNumberError.style.display = 'none';
+                mpesaNumberInput.classList.remove('invalid');
+                return true;
+            }
         }
-    }
 
-    // Format MPESA number as user types
-    mpesaNumberInput.addEventListener('input', function(e) {
-        // Remove all non-digits
-        let value = e.target.value.replace(/\D/g, '');
-        
-        // Ensure it starts with 0
-        if (value.length > 0 && value[0] !== '0') {
-            value = '0' + value;
-        }
-        
-        // Limit to 10 digits
-        if (value.length > 10) {
-            value = value.slice(0, 10);
-        }
-        
-        // Update the input value
-        e.target.value = value;
-    });
+        // Format MPESA number as user types
+        mpesaNumberInput.addEventListener('input', function(e) {
+            // Remove all non-digits
+            let value = e.target.value.replace(/\D/g, '');
 
-    // Show confirmation modal instead of direct form submission
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Validate form before showing confirmation
-        const isFullNameValid = validateFullName();
-        const isMpesaNumberValid = validateMpesaNumber();
-        
-        if (isFullNameValid && isMpesaNumberValid) {
-            // Populate confirmation modal with form values
-            confirmProductName.textContent = '<?php echo $productName; ?>';
-            confirmPrice.textContent = '<?php echo number_format($totalPrice, 2); ?>';
-            confirmMpesaNumber.textContent = mpesaNumberInput.value;
-            
-            // Show confirmation modal
-            confirmationModal.style.display = 'flex';
-        }
-    });
+            // Ensure it starts with 0
+            if (value.length > 0 && value[0] !== '0') {
+                value = '0' + value;
+            }
 
-    // Cancel payment button in confirmation modal
-    cancelPaymentBtn.addEventListener('click', function() {
-        confirmationModal.style.display = 'none';
-    });
+            // Limit to 10 digits
+            if (value.length > 10) {
+                value = value.slice(0, 10);
+            }
 
-    // Confirm payment button in confirmation modal
-    confirmPaymentBtn.addEventListener('click', function() {
-        confirmationModal.style.display = 'none';
-        loadingOverlay.style.display = 'flex';
-        
-        // Submit the form
-        form.submit();
-    });
+            // Update the input value
+            e.target.value = value;
+        });
 
-    // Status message handling
-    <?php if ($status && $message): ?>
-    setTimeout(() => {
-        const messageElement = document.querySelector('.message');
-        if (messageElement) {
-            messageElement.style.opacity = '0.7';
+        // Show confirmation modal instead of direct form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validate form before showing confirmation
+            const isFullNameValid = validateFullName();
+            const isMpesaNumberValid = validateMpesaNumber();
+
+            if (isFullNameValid && isMpesaNumberValid) {
+                // Populate confirmation modal with form values
+                confirmProductName.textContent = '<?php echo $productName; ?>';
+                confirmPrice.textContent = '<?php echo number_format($totalPrice, 2); ?>';
+                confirmMpesaNumber.textContent = mpesaNumberInput.value;
+
+                // Show confirmation modal
+                confirmationModal.style.display = 'flex';
+            }
+        });
+
+        // Cancel payment button in confirmation modal
+        cancelPaymentBtn.addEventListener('click', function() {
+            confirmationModal.style.display = 'none';
+        });
+
+        // Confirm payment button in confirmation modal
+        confirmPaymentBtn.addEventListener('click', function() {
+            confirmationModal.style.display = 'none';
+            loadingOverlay.style.display = 'flex';
+
+            // Submit the form
+            form.submit();
+        });
+
+        // Status message handling
+        <?php if ($status && $message): ?>
             setTimeout(() => {
-                messageElement.style.display = 'none';
-            }, 500);
+                const messageElement = document.querySelector('.message');
+                if (messageElement) {
+                    messageElement.style.opacity = '0.7';
+                    setTimeout(() => {
+                        messageElement.style.display = 'none';
+                    }, 500);
+                }
+            }, 5000);
+        <?php endif; ?>
+
+        // Update hidden inputs for color and quantity
+        const productColor = document.getElementById('productColor');
+        const productQuantity = document.getElementById('productQuantity');
+        const selectedColorInput = document.getElementById('selected_color');
+        const selectedQuantityInput = document.getElementById('selected_quantity');
+
+        productColor.addEventListener('change', function() {
+            selectedColorInput.value = this.value;
+        });
+
+        productQuantity.addEventListener('input', function() {
+            selectedQuantityInput.value = this.value;
+        });
+
+        // Show payment method inputs dynamically
+        function showPaymentMethod(method) {
+            const mpesaInputs = document.getElementById('mpesaInputs');
+            const creditCardInputs = document.getElementById('creditCardInputs');
+
+            if (method === 'mpesa') {
+                mpesaInputs.style.display = 'block';
+                creditCardInputs.style.display = 'none';
+            } else if (method === 'credit_card') {
+                mpesaInputs.style.display = 'none';
+                creditCardInputs.style.display = 'block';
+            }
         }
-    }, 5000);
-    <?php endif; ?>
 
-    // Update hidden inputs for color and quantity
-    const productColor = document.getElementById('productColor');
-    const productQuantity = document.getElementById('productQuantity');
-    const selectedColorInput = document.getElementById('selected_color');
-    const selectedQuantityInput = document.getElementById('selected_quantity');
+        // Hide payment fields and button by default
+        document.getElementById('mpesaInputs').style.display = 'none';
+        document.getElementById('creditCardInputs').style.display = 'none';
+        document.getElementById('payBtn').style.display = 'none';
 
-    productColor.addEventListener('change', function () {
-        selectedColorInput.value = this.value;
-    });
-
-    productQuantity.addEventListener('input', function () {
-        selectedQuantityInput.value = this.value;
-    });
-
-    // Show payment method inputs dynamically
-    function showPaymentMethod(method) {
-        const mpesaInputs = document.getElementById('mpesaInputs');
-        const creditCardInputs = document.getElementById('creditCardInputs');
-
-        if (method === 'mpesa') {
-            mpesaInputs.style.display = 'block';
-            creditCardInputs.style.display = 'none';
-        } else if (method === 'credit_card') {
-            mpesaInputs.style.display = 'none';
-            creditCardInputs.style.display = 'block';
+        // Show relevant payment fields when method is selected
+        function showPaymentMethod(method) {
+            document.getElementById('mpesaInputs').style.display = (method === 'mpesa') ? 'block' : 'none';
+            document.getElementById('creditCardInputs').style.display = (method === 'credit_card') ? 'block' : 'none';
+            document.getElementById('payBtn').style.display = 'block';
         }
-    }
-
-    // Hide payment fields and button by default
-    document.getElementById('mpesaInputs').style.display = 'none';
-    document.getElementById('creditCardInputs').style.display = 'none';
-    document.getElementById('payBtn').style.display = 'none';
-
-    // Show relevant payment fields when method is selected
-    function showPaymentMethod(method) {
-        document.getElementById('mpesaInputs').style.display = (method === 'mpesa') ? 'block' : 'none';
-        document.getElementById('creditCardInputs').style.display = (method === 'credit_card') ? 'block' : 'none';
-        document.getElementById('payBtn').style.display = 'block';
-    }
-</script>
+    </script>
 
 </body>
+
 </html>

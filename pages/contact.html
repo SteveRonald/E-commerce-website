@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,8 @@
       color: #333;
     }
 
-    header, footer {
+    header,
+    footer {
       background-color: #27632a;
       color: white;
       padding: 20px 0;
@@ -26,6 +28,8 @@
       margin: 0 15px;
       text-decoration: none;
       font-weight: 500;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-weight: bold;
     }
 
     .contact-hero {
@@ -48,7 +52,7 @@
       background: white;
       padding: 40px;
       border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.06);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.06);
     }
 
     .contact-container h2 {
@@ -66,7 +70,8 @@
       font-weight: 600;
     }
 
-    input, textarea {
+    input,
+    textarea {
       padding: 12px;
       border-radius: 6px;
       border: 1px solid #ccc;
@@ -164,106 +169,107 @@
       font-size: 1.05em;
       margin-top: 8px;
     }
-    
-        nav a:hover, nav .active {
-            color: #FFD700;
-        }
+
+    nav a:hover,
+    nav .active {
+      color: #FFD700;
+    }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>EcoNest</h1>
-  <nav>
-    <a href="../pages/index.html">Home</a>
-    <a href="../modules/shop_main.php">Shop</a>
-    <a href="../pages/about.html">About</a>
-  </nav>
-</header>
+  <header>
+    <h1>EcoNest</h1>
+    <nav>
+      <a href="../pages/index.html">Home</a>
+      <a href="../modules/shop_main.php">Shop</a>
+      <a href="../pages/about.html">About</a>
+    </nav>
+  </header>
 
-<div class="contact-hero">
-  <h1>Contact Us</h1>
-  <p>We're here to help. Let’s connect.</p>
-</div>
+  <div class="contact-hero">
+    <h1>Contact Us</h1>
+    <p>We're here to help. Let’s connect.</p>
+  </div>
 
-<section class="contact-container">
-  <h2>Send Us a Message</h2>
- 
-  <form id="contactForm" method="POST" action="../modules/send_message.php">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <input type="text" name="subject" placeholder="Subject" required>
-    <textarea name="message" placeholder="Your Message" required style="height: 120px;"></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+  <section class="contact-container">
+    <h2>Send Us a Message</h2>
 
-  <div id="msg"></div>
-  <div id="spinner">
-    <svg width="48" height="48" viewBox="0 0 50 50">
-        <circle cx="25" cy="25" r="20" fill="none" stroke="#2f6b29" stroke-width="5" stroke-linecap="round" stroke-dasharray="31.4 31.4" transform="rotate(-90 25 25)">
-            <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+    <form id="contactForm" method="POST" action="../modules/send_message.php">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="subject" placeholder="Subject" required>
+      <textarea name="message" placeholder="Your Message" required style="height: 120px;"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div id="msg"></div>
+    <div id="spinner">
+      <svg width="48" height="48" viewBox="0 0 50 50">
+        <circle cx="25" cy="25" r="20" fill="none" stroke="#2f6b29" stroke-width="5" stroke-linecap="round"
+          stroke-dasharray="31.4 31.4" transform="rotate(-90 25 25)">
+          <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s"
+            repeatCount="indefinite" />
         </circle>
-    </svg>
-    <div>Sending...</div>
-  </div>
+      </svg>
+      <div>Sending...</div>
+    </div>
 
-  <div class="contact-info">
-    <h3>Visit or Reach Us</h3>
-    <p><strong>Email:</strong> support@econest.co.ke</p>
-    <p><strong>Phone:</strong> +254 799 422 635</p>
-    <p><strong>Address:</strong> EcoNest HQ, Nairobi, Kenya</p>
-  </div>
+    <div class="contact-info">
+      <h3>Visit or Reach Us</h3>
+      <p><strong>Email:</strong> support@econest.co.ke</p>
+      <p><strong>Phone:</strong> +254 799 422 635</p>
+      <p><strong>Address:</strong> EcoNest HQ, Nairobi, Kenya</p>
+    </div>
 
-  <div class="map">
-    <iframe src="https://maps.google.com/maps?q=nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy">
-    </iframe>
-  </div>
-</section>
+    <div class="map">
+      <iframe src="https://maps.google.com/maps?q=nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%"
+        height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  </section>
 
-<footer>
-  <p>&copy; 2025 EcoNest. All rights reserved.</p>
-</footer>
+  <footer>
+    <p>&copy; 2025 EcoNest. All rights reserved.</p>
+  </footer>
 
-<script>
-document.getElementById('contactForm').onsubmit = function(e) {
-    e.preventDefault();
-    var form = this;
-    var msgDiv = document.getElementById('msg');
-    var spinner = document.getElementById('spinner');
-    msgDiv.style.display = 'none';
-    spinner.style.display = 'block';
+  <script>
+    document.getElementById('contactForm').onsubmit = function (e) {
+      e.preventDefault();
+      var form = this;
+      var msgDiv = document.getElementById('msg');
+      var spinner = document.getElementById('spinner');
+      msgDiv.style.display = 'none';
+      spinner.style.display = 'block';
 
-    var formData = new FormData(form);
-    fetch(form.action, {
+      var formData = new FormData(form);
+      fetch(form.action, {
         method: 'POST',
         body: formData
-    })
-    .then(response => response.json())
-    .then(res => {
-        spinner.style.display = 'none';
-        msgDiv.textContent = res.message;
-        msgDiv.style.display = 'block';
-        msgDiv.style.background = res.status === 'success' ? '#e8f5e9' : '#ffebee';
-        msgDiv.style.color = res.status === 'success' ? '#256029' : '#c0392b';
-        msgDiv.style.border = '1.5px solid ' + (res.status === 'success' ? '#256029' : '#c0392b');
-        setTimeout(() => { msgDiv.style.display = 'none'; }, 5000);
-        if(res.status === 'success') form.reset();
-    })
-    .catch(() => {
-        spinner.style.display = 'none';
-        msgDiv.textContent = "An error occurred. Please try again.";
-        msgDiv.style.display = 'block';
-        msgDiv.style.background = '#ffebee';
-        msgDiv.style.color = '#c0392b';
-        msgDiv.style.border = '1.5px solid #c0392b';
-        setTimeout(() => { msgDiv.style.display = 'none'; }, 5000);
-    });
-};
-</script>
+      })
+        .then(response => response.json())
+        .then(res => {
+          spinner.style.display = 'none';
+          msgDiv.textContent = res.message;
+          msgDiv.style.display = 'block';
+          msgDiv.style.background = res.status === 'success' ? '#e8f5e9' : '#ffebee';
+          msgDiv.style.color = res.status === 'success' ? '#256029' : '#c0392b';
+          msgDiv.style.border = '1.5px solid ' + (res.status === 'success' ? '#256029' : '#c0392b');
+          setTimeout(() => { msgDiv.style.display = 'none'; }, 5000);
+          if (res.status === 'success') form.reset();
+        })
+        .catch(() => {
+          spinner.style.display = 'none';
+          msgDiv.textContent = "An error occurred. Please try again.";
+          msgDiv.style.display = 'block';
+          msgDiv.style.background = '#ffebee';
+          msgDiv.style.color = '#c0392b';
+          msgDiv.style.border = '1.5px solid #c0392b';
+          setTimeout(() => { msgDiv.style.display = 'none'; }, 5000);
+        });
+    };
+  </script>
 </body>
+
 </html>

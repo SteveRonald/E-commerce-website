@@ -24,4 +24,3 @@ if ($res && $row = $res->fetch_assoc()) {
     }
 }
 echo json_encode(['status' => 'pending']);
-?>

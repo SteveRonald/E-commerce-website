@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -6,7 +7,8 @@ require '../phpmailer-master/src/PHPMailer.php';
 require '../phpmailer-master/src/SMTP.php';
 require '../phpmailer-master/src/Exception.php';
 
-function sendOTPEmail($toEmail, $otp) {
+function sendOTPEmail($toEmail, $otp)
+{
     $mail = new PHPMailer(true);
 
     try {

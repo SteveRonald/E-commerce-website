@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -161,4 +162,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location:../modules/shop.php?status=error&message=Invalid request method.");
     exit();
 }
-?>

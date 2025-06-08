@@ -41,21 +41,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | EcoNest</title>
     <link rel="stylesheet" href="../css/style.css">
-        <link rel="icon" type="image/png" href="../images/logo.jpg">
+    <link rel="icon" type="image/png" href="../images/logo.jpg">
     <style>
-        body { background: #f4f4f4; margin:0; }
+        body {
+            background: #f4f4f4;
+            margin: 0;
+        }
+
         .navbar {
             width: 100%;
             background: #2f6b29;
             padding: 0;
             margin: 0 0 30px 0;
-            box-shadow: 0 2px 8px rgba(47,107,41,0.06);
+            box-shadow: 0 2px 8px rgba(47, 107, 41, 0.06);
         }
+
         .navbar-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -64,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: space-between;
             padding: 0 24px;
         }
-        
+
         .navbar-logo {
             font-size: 2em;
             font-weight: bold;
@@ -73,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-family: 'Segoe UI', Arial, sans-serif;
             padding: 0 10px;
         }
+
         .navbar ul {
             list-style: none;
             margin: 0;
@@ -80,9 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: flex;
             align-items: center;
         }
+
         .navbar li {
             margin: 0;
         }
+
         .navbar a {
             display: block;
             color: #fff;
@@ -93,27 +102,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 4px;
             transition: background 0.2s;
         }
-        .navbar a:hover, .navbar .active {
+
+        .navbar a:hover,
+        .navbar .active {
             color: #FFD700;
         }
-        
+
         .auth-container {
             max-width: 400px;
             margin: 50px auto;
             background: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             padding: 30px 40px 20px 40px;
         }
+
         .auth-container h2 {
             color: #2f6b29;
             margin-bottom: 20px;
             text-align: center;
         }
+
         .auth-container label {
             font-weight: 600;
             color: #2f6b29;
         }
+
         .auth-container input[type="email"],
         .auth-container input[type="password"] {
             width: 100%;
@@ -123,6 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 6px;
             font-size: 1rem;
         }
+
         .auth-container button {
             width: 100%;
             background: #2f6b29;
@@ -136,9 +151,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: 10px;
             transition: background 0.3s;
         }
+
         .auth-container button:hover {
             background: #5d8c56;
         }
+
         .auth-container .error {
             color: #e74c3c;
             background: #fbeaea;
@@ -148,29 +165,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 15px;
             text-align: center;
         }
+
         .auth-container p {
             text-align: center;
             margin-top: 18px;
         }
+
         .auth-container a {
             color: #2f6b29;
             text-decoration: underline;
         }
+
         @media (max-width: 700px) {
-            .auth-container { max-width: 98vw; padding: 18px 5vw 10px 5vw; }
-            .navbar-content { flex-direction: column; align-items: flex-start; padding: 0 8px; }
-            .navbar-logo { font-size: 1.3em; padding: 10px 0 0 0; }
-            .navbar ul { width: 100%; }
-            .navbar a { padding: 14px 10px; font-size: 1em; }
+            .auth-container {
+                max-width: 98vw;
+                padding: 18px 5vw 10px 5vw;
+            }
+
+            .navbar-content {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0 8px;
+            }
+
+            .navbar-logo {
+                font-size: 1.3em;
+                padding: 10px 0 0 0;
+            }
+
+            .navbar ul {
+                width: 100%;
+            }
+
+            .navbar a {
+                padding: 14px 10px;
+                font-size: 1em;
+            }
         }
+
         #gSignInWrapper {
             text-align: center;
             margin-top: 20px;
         }
+
         .g_id_signin {
             display: inline-block;
             margin-top: 10px;
         }
+
         .g_id_signin button {
             width: 100%;
             padding: 12px;
@@ -182,29 +224,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border: none;
             cursor: pointer;
         }
+
         .g_id_signin button:hover {
             background-color: #357ae8;
         }
+
         .auth-container a {
             color: #2f6b29;
             text-decoration: none;
             transition: text-decoration 0.2s;
         }
+
         .auth-container a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="navbar-content">
             <span class="navbar-logo">EcoNest 🌿</span>
             <ul>
                 <li><a href="../pages/index.html">Home</a></li>
-                <li><a href="../modules/shop_main.php">Shop</a></li>
-                <li><a href="../modules/cart.php">Cart</a></li>
-                <li><a href="../modules/register.php">Register</a></li>
-                <li><a href="../modules/login.php" class="active">Login</a></li>
+                <li><a href="../pages/about.html">About</a></li>
             </ul>
         </div>
     </nav>
@@ -244,8 +287,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>forgot password? <a href="../modules/reset_password.php">Reset it</a></p>
     </div>
 
-    <footer  style="background-color: #2f6b29; color: white; text-align: center; padding: 30px 10px 18px 10px; font-size: 1rem;">
-        <div  style="margin: 12px 0; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+    <footer style="background-color: #2f6b29; color: white; text-align: center; padding: 30px 10px 18px 10px; font-size: 1rem;">
+        <div style="margin: 12px 0; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
             <a href="../pages/about.html" style="color:#fff;text-decoration:none;font-size:1.08em;transition:color 0.2s;">About</a>
             <a href="../pages/contact.html" style="color:#fff;text-decoration:none;font-size:1.08em;transition:color 0.2s;">Contact</a>
             <a href="../pages/privacy.html" style="color:#fff;text-decoration:none;font-size:1.08em;transition:color 0.2s;">Privacy Policy</a>
@@ -262,4 +305,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
+
 </html>

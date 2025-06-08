@@ -13,7 +13,7 @@ if ($product_id) {
     } else {
         $conn->query("INSERT INTO product_loves (product_id) VALUES ($product_id)");
     }
-    echo json_encode(['success'=>true]);
+    echo json_encode(['success' => true]);
 } else {
-    echo json_encode(['success'=>false, 'message'=>'Invalid data']);
+    echo json_encode(['success' => false, 'message' => 'Invalid data']);
 }

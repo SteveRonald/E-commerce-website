@@ -55,6 +55,7 @@ exit;
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Send Message</title>
     <style>
@@ -65,10 +66,21 @@ exit;
             border-radius: 6px;
             font-weight: bold;
         }
-        #msg.success { background: #e8f5e9; color: #256029; border: 1px solid #256029; }
-        #msg.error { background: #ffebee; color: #c0392b; border: 1px solid #c0392b; }
+
+        #msg.success {
+            background: #e8f5e9;
+            color: #256029;
+            border: 1px solid #256029;
+        }
+
+        #msg.error {
+            background: #ffebee;
+            color: #c0392b;
+            border: 1px solid #c0392b;
+        }
     </style>
 </head>
+
 <body>
     <form id="contactForm" method="POST">
         <!-- your form fields here -->
@@ -81,8 +93,11 @@ exit;
             msgDiv.textContent = <?php echo json_encode($msg); ?>;
             msgDiv.className = '<?= (strpos($msg, "successfully") !== false) ? "success" : "error" ?>';
             msgDiv.style.display = 'block';
-            setTimeout(function(){ msgDiv.style.display = 'none'; }, 4000);
+            setTimeout(function() {
+                msgDiv.style.display = 'none';
+            }, 4000);
         <?php endif; ?>
     </script>
 </body>
+
 </html>

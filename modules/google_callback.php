@@ -45,4 +45,3 @@ if ($id_token) {
 }
 header("Location: ../modules/register.php?error=Google+Sign-In+failed");
 exit();
-?>

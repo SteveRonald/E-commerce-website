@@ -6,10 +6,11 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="../images/logo.jpg">
+    <link rel="icon" type="image/png" href="../images/logo.jpg">
     <title><?php echo $status === 'success' ? 'Success' : 'Error'; ?></title>
     <style>
         body {
@@ -21,6 +22,7 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .card {
             background: #fff;
             border-radius: 16px;
@@ -31,6 +33,7 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
             max-width: 400px;
             position: relative;
         }
+
         .icon {
             width: 80px;
             height: 80px;
@@ -43,23 +46,28 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
             color: #fff;
             margin-bottom: 20px;
         }
+
         .icon.success {
-            background:rgb(40, 173, 96);
+            background: rgb(40, 173, 96);
         }
+
         .icon.error {
             background: #e74c3c;
         }
+
         .card-title {
             font-size: 1.8rem;
             font-weight: bold;
             color: #23243a;
             margin-bottom: 10px;
         }
+
         .card-message {
             color: #555;
             font-size: 1.1rem;
             margin-bottom: 20px;
         }
+
         .email-message {
             color: #2f6b29;
             font-size: 1rem;
@@ -68,6 +76,7 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
             border-radius: 8px;
             padding: 10px 0;
         }
+
         .progress-container {
             width: 100%;
             background: #e0e0e0;
@@ -77,17 +86,20 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
             margin-top: 20px;
             position: relative;
         }
+
         .progress-bar {
             height: 100%;
             background: #2ecc71;
             width: 100%;
             transition: width 1s linear;
         }
+
         .countdown {
             margin-top: 10px;
             font-size: 0.9rem;
             color: #888;
         }
+
         .retry-btn {
             margin-top: 1.5rem;
             padding: 0.7rem 1.5rem;
@@ -100,11 +112,13 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
             text-decoration: none;
             display: inline-block;
         }
+
         .retry-btn:hover {
             background: #c0392b;
         }
     </style>
 </head>
+
 <body>
     <div class="card">
         <?php if ($status === 'success'): ?>
@@ -140,4 +154,5 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
         <?php endif; ?>
     </div>
 </body>
+
 </html>
