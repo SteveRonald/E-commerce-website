@@ -296,9 +296,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="../modules/shop_main.php" style="color:#fff;text-decoration:none;font-size:1.08em;transition:color 0.2s;">Shop</a>
         </div>
         <div style="margin: 12px 0; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
-            <a href="#" title="Facebook" style="color:#fff;font-size:1.3em;"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" title="Twitter" style="color:#fff;font-size:1.3em;"><i class="fab fa-twitter"></i></a>
-            <a href="#" title="Instagram" style="color:#fff;font-size:1.3em;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100085312746341" title="Facebook" style="color:#fff;font-size:1.3em;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/Stevegmail98" title="Twitter" style="color:#fff;font-size:1.3em;"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.tiktok.com/@steve.ronald4" title="Tiktok" style="color:#fff;font-size:1.3em;"><i class="fab fa-tiktok"></i></a>
         </div>
         <p>&copy; 2025 EcoNest. All rights reserved.</p>
     </footer>

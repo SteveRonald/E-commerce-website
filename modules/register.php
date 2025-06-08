@@ -393,10 +393,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
     <footer style="background:#2f6b29;color:#fff;padding:24px 0;text-align:center;">
         <p style="margin:0;font-size:1.2em;">Follow us on social media</p>
-        <div class="footer-social" style="margin: 12px 0; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
-            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+       <div class="footer-social" style="margin: 12px 0; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+            <a href="https://www.facebook.com/profile.php?id=100085312746341" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/Stevegmail98" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.tiktok.com/@steve.ronald4" title="Tiktok"><i class="fab fa-tiktok"></i></a>
         </div>
         <p>&copy; 2025 EcoNest. All rights reserved.</p>
     </footer>
