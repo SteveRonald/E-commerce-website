@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <title>Complete Profile</title>
+        <link rel="icon" type="image/png" href="../images/logo.jpg">
     <style>
         body { background: #f4f4f4; font-family: 'Segoe UI', Arial, sans-serif; }
         .profile-container {

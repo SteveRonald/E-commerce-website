@@ -9,6 +9,7 @@ $redirectUrl = $status === 'success' ? 'shop_main.php' : 'shop.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="../images/logo.jpg">
     <title><?php echo $status === 'success' ? 'Success' : 'Error'; ?></title>
     <style>
         body {

@@ -283,6 +283,7 @@ if ($page === 'admins') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | EcoNest</title>
     <link rel="stylesheet" href="../css/style.css">
+        <link rel="icon" type="image/png" href="../images/logo.jpg">
     <style>
         body { background: #f4f4f4; margin:0; font-family: 'Segoe UI', Arial, sans-serif; }
         .admin-layout {
