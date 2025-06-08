@@ -1089,14 +1089,14 @@ if ($page === 'admins') {
                                 <td>
                                     <?php if ($a['id'] != $admin_id): ?>
                                         <?php if ($admin_role === 'superadmin'): ?>
-                                            <a href="../modules/admin.php?page=admins&edit_admin=<?php echo $a['id']; ?>" style="background:#2980b9;color:#fff;padding:6px 14px;border-radius:5px;text-decoration:none;">Edit</a>
+                                            <a href="../modules/admin.php?page=admins&edit_admin=<?php echo $a['id']; ?>" style="background:#2980b9;color:#fff;padding:6px 12px;border-radius:5px;text-decoration:none;">Edit</a>
                                             <a href="../modules/admin.php?page=admins&reset_admin=<?php echo $a['id']; ?>" style="background:#f39c12;color:#fff;padding:6px 14px;border-radius:5px;text-decoration:none;margin-left:5px;">Reset Password</a>
                                             <a href="../modules/admin.php?page=admins&delete_admin=<?php echo $a['id']; ?>"
                                                 class="delete-admin-link"
-                                                style="background:#e74c3c;color:#fff;padding:6px 14px;border-radius:5px;text-decoration:none;margin-left:5px;">
+                                                style="background:#e74c3c;color:#fff;padding:6px 10px;border-radius:5px;text-decoration:none;margin-left:5px;">
                                                 Delete
                                             </a>
-                                            <a href="../modules/admin.php?page=admins&toggle_admin=<?php echo $a['id']; ?>" style="background:#888;color:#fff;padding:6px 14px;border-radius:5px;text-decoration:none;margin-left:5px;">
+                                            <a href="../modules/admin.php?page=admins&toggle_admin=<?php echo $a['id']; ?>" style="background:#888;color:#fff;padding:6px 10px;border-radius:5px;text-decoration:none;margin-left:4px;">
                                                 <?php echo $a['status'] === 'active' ? 'Disable' : 'Enable'; ?>
                                             </a>
                                         <?php else: ?>
