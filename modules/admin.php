@@ -214,7 +214,7 @@ if ($page === 'admins') {
         $confirm_pass = $_POST['confirm_admin_password'];
         if ($new_pass && $new_pass === $confirm_pass) {
             $hash = password_hash($new_pass, PASSWORD_DEFAULT);
-            $stmt = $conn->prepare("UPDATE admins SET password=? WHERE id=?");
+            $stmt = $conn->prepare("UPDATE admins SET password_hash=? WHERE id=?");
             $stmt->bind_param("si", $hash, $reset_id);
             $stmt->execute();
             $conn->query("INSERT INTO admin_logs (admin_id, action, details) VALUES ($admin_id, 'reset_password', 'Reset password for admin ID $reset_id')");
