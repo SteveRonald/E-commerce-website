@@ -101,6 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 1.08em;
             border-radius: 4px;
             transition: background 0.2s;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-weight: bold;
         }
 
         .navbar a:hover,
