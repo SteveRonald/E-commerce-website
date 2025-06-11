@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login | EcoNest</title>
-    <link rel="icon" type="image/png" href="../images/logo.jpg">
+    <link rel="icon" type="image/png" href="../images/logo-removebg-preview (1).png">
     <style>
         body {
             background: #f4f4f4;

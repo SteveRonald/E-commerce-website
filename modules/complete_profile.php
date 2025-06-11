@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <title>Complete Profile</title>
-    <link rel="icon" type="image/png" href="../images/logo.jpg">
+    <link rel="icon" type="image/png" href="../images/logo-removebg-preview (1).png">
     <style>
         body {
             background: #f4f4f4;

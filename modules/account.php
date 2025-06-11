@@ -116,7 +116,7 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account | EcoNest</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="icon" type="image/png" href="../images/logo.jpg">
+    <link rel="icon" type="image/png" href="../images/logo-removebg-preview (1).png">
     <style>
         html,
         body {
