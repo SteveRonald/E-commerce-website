@@ -82,9 +82,6 @@ exit;
 </head>
 
 <body>
-    <form id="contactForm" method="POST">
-        <!-- your form fields here -->
-    </form>
     <div id="msg"></div>
     <script>
         // Display PHP message if set
