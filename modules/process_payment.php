@@ -54,7 +54,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->close();
         }
         $conn->close();
-        header("Location: ../modules/success.php?status=success&message=Cart order placed successfully");
+
+        // Send email for cart order
+        $userEmail = '';
+        if ($user_id) {
+            $conn2 = new mysqli("localhost", "root", "", "ecommerce");
+            $stmt2 = $conn2->prepare("SELECT email FROM users WHERE id=?");
+            $stmt2->bind_param("i", $user_id);
+            $stmt2->execute();
+            $stmt2->bind_result($userEmail);
+            $stmt2->fetch();
+            $stmt2->close();
+            $conn2->close();
+        } else {
+            $userEmail = isset($_POST['email']) ? $_POST['email'] : '';
+        }
+
+        if ($userEmail) {
+            $mail = new PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'okothroni863@gmail.com';
+                $mail->Password   = 'lmag tcnr iyki avzx';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port       = 587;
+
+                $mail->setFrom('okothroni863@gmail.com', 'EcoNest');
+                $mail->addAddress($userEmail, $fullName);
+
+                // Build cart items HTML
+                $itemsHtml = '';
+                foreach ($cart as $item) {
+                    $itemsHtml .= "<li>{$item['name']} (Color: {$item['color']}, Qty: {$item['quantity']}, Price: KSh {$item['price']})</li>";
+                }
+
+                $mail->isHTML(true);
+                $mail->Subject = 'Your EcoNest Cart Order Confirmation';
+                $mail->Body    = "
+                    <h2>Thank you for your order, {$fullName}!</h2>
+                    <p>Order Details:</p>
+                    <ul>
+                        {$itemsHtml}
+                    </ul>
+                    <p>Delivery Address: {$delivery_address}</p>
+                    <p>We will contact you soon.</p>
+                ";
+                $mail->AltBody = "Thank you for your order, {$fullName}!\nOrder Details:\n" . strip_tags($itemsHtml) . "\nDelivery Address: {$delivery_address}";
+
+                $mail->send();
+            } catch (Exception $e) {
+                // Optionally log error
+            }
+        }
+
+        // Set a flag to clear cart on next page load
+        echo "<script>sessionStorage.setItem('clearCart', '1');window.location.href='../modules/success.php?status=success&message=Cart order placed successfully.&emailmsg=Order confirmation email sent! Check your inbox.';</script>";
         exit();
     }
 

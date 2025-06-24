@@ -272,6 +272,13 @@ if (!empty($_GET['msg'])) {
         document.getElementById('clearCartBtn').onclick = clearCart;
         renderCart();
         updateCartCount();
+        // Clear cart if flag is set (after successful order)
+        if (sessionStorage.getItem('clearCart') === '1') {
+            localStorage.removeItem('cart');
+            sessionStorage.removeItem('clearCart');
+            renderCart();
+            updateCartCount();
+        }
     </script>
 </body>
 
