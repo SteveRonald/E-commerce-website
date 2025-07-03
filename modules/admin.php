@@ -1156,8 +1156,8 @@ if ($page === 'admins') {
                 Are you sure you want to delete this product?
             </div>
             <div style="display:flex;justify-content:center;gap:18px;">
-                <button id="confirmDeleteBtn" style="background:#e74c3c;color:#fff;padding:8px 22px;border:none;border-radius:5px;font-size:1em;cursor:pointer;">Delete</button>
-                <button id="cancelDeleteBtn" style="background:#888;color:#fff;padding:8px 22px;border:none;border-radius:5px;font-size:1em;cursor:pointer;">Cancel</button>
+                <button id="confirmDeleteBtn" style="background:#e74c3c;color:#fff;padding:8px 22px;border:none;border-radius:5px;font-size:1em;cursor:pointer;">Yes Delete</button>
+                <button id="cancelDeleteBtn" style="background:#888;color:#fff;padding:8px 22px;border:none;border-radius:5px;font-size:1em;cursor:pointer;">No Cancel</button>
             </div>
         </div>
     </div>
@@ -1167,8 +1167,8 @@ if ($page === 'admins') {
                 Are you sure you want to delete this admin?
             </div>
             <div style="display:flex;justify-content:center;gap:18px;">
-                <button id="confirmDeleteAdminBtn" style="background:#e74c3c;color:#fff;padding:8px 22px;border:none;border-radius:5px;font-size:1em;cursor:pointer;">Delete</button>
-                <button id="cancelDeleteAdminBtn" style="background:#888;color:#fff;padding:8px 22px;border:none;border-radius:5px;font-size:1em;cursor:pointer;">Cancel</button>
+                <button id="confirmDeleteAdminBtn" style="background:#e74c3c;color:#fff;padding:8px 22px;border:none;border-radius:5px;font-size:1em;cursor:pointer;">Yes Delete</button>
+                <button id="cancelDeleteAdminBtn" style="background:#888;color:#fff;padding:8px 22px;border:none;border-radius:5px;font-size:1em;cursor:pointer;">No Cancel</button>
             </div>
         </div>
     </div>

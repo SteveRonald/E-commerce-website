@@ -473,7 +473,7 @@ if ($selectedCategory) {
                             </span>
                         </div>
                         <p>KSh <?php echo htmlspecialchars($p['price']); ?></p>
-                        <button type="button" class="btn view-details-btn">View Details</button>
+                        <button type="button" class="btn view-details-btn">Details</button>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
