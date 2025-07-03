@@ -4,7 +4,8 @@ $host = "localhost";
 $username = "root";
 $password = "";
 $database = "ecommerce";
-$conn = new mysqli($host, $username, $password, $database);
+$conn = null;
+require_once __DIR__ . '/db_connect.php';
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

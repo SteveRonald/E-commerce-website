@@ -1,7 +1,8 @@
 
 <?php
 session_start();
-$conn = new mysqli("localhost", "root", "", "ecommerce");
+$conn = null;
+require_once __DIR__ . '/db_connect.php';
 $user_id = $_SESSION['user_id'] ?? null;
 $product_id = intval($_POST['product_id'] ?? 0);
 $rating = intval($_POST['rating'] ?? 0);

@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_SESSION['google_name'];
     $email = $_SESSION['google_email'];
 
-    $conn = new mysqli("localhost", "root", "", "ecommerce");
+    $conn = null;
+    require_once __DIR__ . '/db_connect.php';
     $stmt = $conn->prepare("INSERT INTO users (name, email, address, city, phone) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $name, $email, $address, $city, $phone);
     $stmt->execute();

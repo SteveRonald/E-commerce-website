@@ -8,7 +8,7 @@ $admin_id = $_SESSION['admin_id'] ?? 1;
 $admin_role = $_SESSION['admin_role'] ?? 'admin'; // Only set here!
 
 // DB connection
-$conn = new mysqli("localhost", "root", "", "ecommerce");
+require_once __DIR__ . '/db_connect.php';
 if ($conn->connect_error) die("DB error");
 
 // Sidebar selection logic

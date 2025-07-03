@@ -4,7 +4,8 @@ $data = json_decode(file_get_contents('php://input'), true);
 $checkoutRequestID = $data['Body']['stkCallback']['CheckoutRequestID'] ?? null;
 $resultCode = $data['Body']['stkCallback']['ResultCode'] ?? null;
 
-$conn = new mysqli("localhost", "root", "", "ecommerce");
+$conn = null;
+require_once __DIR__ . '/db_connect.php';
 if ($conn->connect_error) exit();
 
 if ($checkoutRequestID) {

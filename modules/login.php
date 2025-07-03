@@ -3,7 +3,8 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
-    $conn = new mysqli("localhost", "root", "", "ecommerce");
+$conn = null;
+require_once __DIR__ . '/db_connect.php';
     if ($conn->connect_error) die("DB error");
     $stmt = $conn->prepare("SELECT id, name, password_hash FROM users WHERE email=?");
     $stmt->bind_param("s", $email);

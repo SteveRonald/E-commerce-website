@@ -4,7 +4,9 @@ if (!isset($_SESSION['user_id'])) {
     header("Location:../modules/login.php?redirect=cart.php&msg=Please login or register before checking out.");
     exit();
 }
-
+// Centralized DB connection (if needed in future)
+$conn = null;
+require_once __DIR__ . '/db_connect.php';
 // Handle messages (from ?msg= or session)
 $msg = '';
 if (!empty($_GET['msg'])) {

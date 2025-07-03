@@ -10,7 +10,8 @@ if (isset($_GET['ref'])) {
     exit;
 }
 
-$conn = new mysqli("localhost", "root", "", "ecommerce");
+$conn = null;
+require_once __DIR__ . '/db_connect.php';
 $res = $conn->query("SELECT order_status FROM transactions WHERE checkout_request_id='$ref' LIMIT 1");
 if ($res && $row = $res->fetch_assoc()) {
     if ($row['order_status'] == 'received') {

@@ -14,7 +14,8 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Connect to DB
-    $conn = new mysqli("localhost", "root", "", "ecommerce");
+    $conn = null;
+    require_once __DIR__ . '/db_connect.php';
     if ($conn->connect_error) {
         header("Location: ../pages/cart.html?status=error&message=Database connection failed.");
         exit();

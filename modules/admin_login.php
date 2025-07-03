@@ -7,7 +7,8 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
-    $conn = new mysqli("localhost", "root", "", "ecommerce");
+    $conn = null;
+    require_once __DIR__ . '/db_connect.php';
     if ($conn->connect_error) die("DB error");
     $stmt = $conn->prepare("SELECT id, password_hash, role FROM admins WHERE username=?");
     $stmt->bind_param("s", $username);

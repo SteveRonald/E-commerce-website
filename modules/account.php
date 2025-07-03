@@ -4,7 +4,8 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-$conn = new mysqli("localhost", "root", "", "ecommerce");
+$conn = null;
+require_once __DIR__ . '/db_connect.php';
 $user_id = $_SESSION['user_id'];
 
 // Handle profile picture upload

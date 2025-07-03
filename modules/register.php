@@ -12,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password !== $confirm) {
         $error = "Passwords do not match.";
     } else {
-        $conn = new mysqli("localhost", "root", "", "ecommerce");
+        $conn = null;
+        require_once __DIR__ . '/db_connect.php';
         if ($conn->connect_error) die("DB error");
         $stmt = $conn->prepare("SELECT id FROM users WHERE email=?");
         $stmt->bind_param("s", $email);

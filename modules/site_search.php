@@ -6,7 +6,8 @@ if (!$q) {
     exit;
 }
 
-$conn = new mysqli("localhost", "root", "", "ecommerce");
+$conn = null;
+require_once __DIR__ . '/db_connect.php';
 $results = [];
 
 // --- 1. Search Products (public info only) ---

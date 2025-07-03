@@ -1,6 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "ecommerce");
-if ($conn->connect_error) die("DB connection failed");
+require_once __DIR__ . '/db_connect.php';
 $res = $conn->query("SELECT * FROM products ORDER BY created_at DESC");
 $products = [];
 while ($row = $res->fetch_assoc()) $products[] = $row;
