@@ -3,8 +3,8 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
-$conn = null;
-require_once __DIR__ . '/db_connect.php';
+    $conn = null;
+    require_once __DIR__ . '/db_connect.php';
     if ($conn->connect_error) die("DB error");
     $stmt = $conn->prepare("SELECT id, name, password_hash FROM users WHERE email=?");
     $stmt->bind_param("s", $email);
@@ -274,7 +274,7 @@ require_once __DIR__ . '/db_connect.php';
                     data-client_id="633377089412-nq4smjp6ugsb5qvi7orvv7kr1epb9hg1.apps.googleusercontent.com"
                     data-context="signin"
                     data-ux_mode="redirect"
-                    data-login_uri="http://localhost/e-commerce/EcoNest/modules/google_callback.php"
+                    data-login_uri="http://localhost/EcoNest/code/modules/google_callback.php"
                     data-auto_prompt="false">
                 </div>
                 <div class="g_id_signin"

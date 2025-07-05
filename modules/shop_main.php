@@ -35,7 +35,7 @@ if ($selectedCategory) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="../images/logo-removebg-preview (1).png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -97,7 +97,7 @@ if ($selectedCategory) {
         .sidebar ul {
             list-style: none;
             padding: 0;
-        }
+                                                                                                                                                                                                                                                                }
 
         .sidebar ul li {
             margin-bottom: 8px;

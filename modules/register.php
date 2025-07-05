@@ -294,7 +294,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     data-client_id="633377089412-nq4smjp6ugsb5qvi7orvv7kr1epb9hg1.apps.googleusercontent.com"
                     data-context="signup"
                     data-ux_mode="redirect"
-                    data-login_uri="http://localhost/e-commerce/EcoNest/modules/google_callback.php"
+                    data-login_uri="http://localhost/EcoNest/code/modules/google_callback.php"
                     data-auto_prompt="false">
                 </div>
                 <div class="g_id_signin"
